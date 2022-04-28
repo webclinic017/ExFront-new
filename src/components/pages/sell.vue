@@ -1,11 +1,11 @@
 <template>
   <div>
     <b-card v-if="price && rialprice"> 
-      <h3 v-if="this.sym !== 'USDT' && price && rialprice" style="float:right; color:#444" >قیمت ریالی : <a style="font:20px 'arial'">{{price.buy *rialprice[0].rial * 1.002}}</a></h3>
-      <h3 v-if="this.sym !== 'USDT' && price" style="float:left; color:#444" >قیمت دلاری : <a style="font:20px 'arial'">{{(price.buy )}}</a></h3>
+      <h3 v-if="this.sym !== 'USDT' && price && rialprice" style="float:right; color:#888" >قیمت ریالی : <a style="font:20px 'arial'">{{price.buy *rialprice[0].rial * 1.002}}</a></h3>
+      <h3 v-if="this.sym !== 'USDT' && price" style="float:left; color:#888" >قیمت دلاری : <a style="font:20px 'arial'">{{(price.buy )}}</a></h3>
 
-      <h3 v-if="this.sym === 'USDT' && price && rialprice" style="float:right; color:#444" >قیمت ریالی : <a style="font:20px 'arial'">{{price.buy *rialprice[0].rial * 0.996}}</a></h3>
-      <h3 v-if="this.sym === 'USDT' && price" style="float:left; color:#444" >قیمت دلاری : <a style="font:20px 'arial'">{{(price.buy )}}</a></h3>
+      <h3 v-if="this.sym === 'USDT' && price && rialprice" style="float:right; color:#888" >قیمت ریالی : <a style="font:20px 'arial'">{{price.buy *rialprice[0].rial * 0.996}}</a></h3>
+      <h3 v-if="this.sym === 'USDT' && price" style="float:left; color:#888" >قیمت دلاری : <a style="font:20px 'arial'">{{(price.buy )}}</a></h3>
       </b-card>
         <b-card-header class="row no-gutters align-items-center">فروش</b-card-header>
 
@@ -35,7 +35,7 @@
         <b-form-group label="">
        
            <b-card>
-           <h5 style="float:right; color:#444" v-if="price && rialprice">موجودی : <a @click="balanceset()" class="btn btn-dark" style="font:12px 'arial'; padding:5px 20px ; color:white">{{rial}}</a>  {{sym}} </h5><br>
+           <h5 style="float:right; color:#888" v-if="price && rialprice">موجودی : <a @click="balanceset()" class="btn btn-dark" style="font:12px 'arial'; padding:5px 20px ">{{rial}}</a>  {{sym}} </h5><br>
             <div class="input-group mb-3" style="direction:ltr ; margin:0">
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">|{{sym}}|</span>
@@ -44,14 +44,14 @@
             </div>
                 <table style="width:98%">
                 <tr>
-                  <td style="text-align:center; color:#444 ; font: 12px 'arial'">0%</td>
-                  <td style="text-align:center; color:#444 ; font: 12px 'arial'">25%</td>
-                  <td style="text-align:center; color:#444 ; font: 12px 'arial'">50%</td>
-                  <td style="text-align:center; color:#444 ; font: 12px 'arial'">75%</td>
-                  <td style="text-align:center; color:#444 ; font: 12px 'arial'">100%</td>
+                  <td style="text-align:center; color:#888 ; font: 12px 'arial'">0%</td>
+                  <td style="text-align:center; color:#888 ; font: 12px 'arial'">25%</td>
+                  <td style="text-align:center; color:#888 ; font: 12px 'arial'">50%</td>
+                  <td style="text-align:center; color:#888 ; font: 12px 'arial'">75%</td>
+                  <td style="text-align:center; color:#888 ; font: 12px 'arial'">100%</td>
                 </tr>
               </table>
-                <b-form-slider step="any" :ticks_tooltip="true" v-if="rial | rial === 0" :min="0.0000000" :max="rial" v-model="amount"></b-form-slider><br>
+                <b-form-slider step="0.000001" :ticks_tooltip="true" v-if="rial | rial === 0" :min="0.0000000" :max="rial" v-model="amount"></b-form-slider><br>
               </b-card>
               
             <br><h4 style="text-align:center; width:100% ; clear:both">معادل</h4><br>
@@ -64,7 +64,7 @@
               </div>
             </b-card>
         </b-form-group>
-        <h5 style="float:right; color:#444" v-if="price && rialprice">دریافتی : <a  class="btn btn-dark" style="font:12px 'arial'; padding:5px 20px ; color:white">{{getting}}</a></h5><br><br>
+        <h5 style="float:right; color:#888" v-if="price && rialprice">دریافتی : <a  class="btn btn-dark" style="font:12px 'arial'; padding:5px 20px ">{{getting}}</a></h5><br><br>
         <b-btn @click="submit()" id="submit" variant="dark">درخواست فروش</b-btn>
       </fieldset>
       </b-card><br><br>

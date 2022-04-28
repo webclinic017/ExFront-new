@@ -154,7 +154,7 @@ li {
 
 .card-footer input[type="text"] {
   background-color: #ffffff;
-  color: #444444;
+  color: #888;
   padding: 7px;
   font-size: 13px;
   border: 2px solid #cccccc;

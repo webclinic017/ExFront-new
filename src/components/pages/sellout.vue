@@ -1,11 +1,11 @@
 <template>
   <div>
-        <b-card> 
-          <h3 v-if="this.sym !== 'USDT' && price && rialprice" style="float:right; color:#444" >قیمت ریالی : <a style="font:20px 'arial'">{{price.buy *rialprice[0].rial * 1.002}}</a></h3>
-      <h3 v-if="this.sym !== 'USDT' && price" style="float:left; color:#444" >قیمت دلاری : <a style="font:20px 'arial'">{{(price.buy )}}</a></h3>
+        <b-card v-if="price"> 
+          <h3 v-if="this.sym !== 'USDT' && price && rialprice" style="float:right; color:#888" >قیمت ریالی : <a style="font:20px 'arial'">{{price.buy *rialprice[0].rial * 1.002}}</a></h3>
+      <h3 v-if="this.sym !== 'USDT' && price" style="float:left; color:#888" >قیمت دلاری : <a style="font:20px 'arial'">{{(price.buy )}}</a></h3>
 
-      <h3 v-if="this.sym === 'USDT' && price && rialprice" style="float:right; color:#444" >قیمت ریالی : <a style="font:20px 'arial'">{{price.buy *rialprice[0].rial * 0.996}}</a></h3>
-      <h3 v-if="this.sym === 'USDT' && price" style="float:left; color:#444" >قیمت دلاری : <a style="font:20px 'arial'">{{(price.buy )}}</a></h3>
+      <h3 v-if="this.sym === 'USDT' && price && rialprice" style="float:right; color:#888" >قیمت ریالی : <a style="font:20px 'arial'">{{price.buy *rialprice[0].rial * 0.996}}</a></h3>
+      <h3 v-if="this.sym === 'USDT' && price" style="float:left; color:#888" >قیمت دلاری : <a style="font:20px 'arial'">{{(price.buy )}}</a></h3>
         </b-card>
 
             <b-card-header class="row no-gutters align-items-center">فروش</b-card-header>
@@ -54,7 +54,7 @@
           <label hidden for="hash" id="hashlable">کد هش</label>
           <b-input hidden id="hash" v-model="hash" placeholder=" کد پیگیری - هش " />
         </b-form-group>
-        <h5 style="float:right; color:#444" v-if="price && rialprice">دریافتی : <a  class="btn btn-dark" style="font:12px 'arial'; padding:5px 20px ; color:white">{{getting}}</a></h5><br><br>
+        <h5 style="float:right; color:#888" v-if="price && rialprice">دریافتی : <a  class="btn btn-dark" style="font:12px 'arial'; padding:5px 20px">{{getting}}</a></h5><br><br>
         <b-btn type="button" @click="firstsubmit()" value="درخواست فروش" id="firstsubmit" variant="dark"> مرحله بعد</b-btn>
         <b-btn hidden id="submit"  @click="submit()" variant="dark"> ثبت درخواست </b-btn>
       </form>
@@ -112,7 +112,7 @@ export default {
     sym:'',
     hash: '',
     rialprice: 0,
-    price: [],
+    price: false,
     rial: 0,
     getting: 0
   }),

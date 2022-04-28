@@ -25,7 +25,7 @@
                 {{section.get_sheba}} <br>
                 شماره حساب  <br>
                 {{section.get_number}} <br>
-                <a @click="cards(section.user)" style="cursor:pointer; color:#444">لیست کارت ها</a>
+                <a @click="cards(section.user)" style="cursor:pointer; color:#888">لیست کارت ها</a>
               </div>
               <div class="col-1 cent"><button class="btnfont btn btn-danger" style="width:100%;float:left" @click="reject(section.id)">رد </button><button class="btnfont btn btn-success" style="width:100%;float:left" @click="accept(section.id)"> تایید </button></div>
             </div>

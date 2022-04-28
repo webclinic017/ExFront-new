@@ -21,7 +21,7 @@
         <b-col lg="5" md="7">
           <b-card no-body class="border-0 mb-0">
             <b-card-header class="bg-transparent pb-5"  ><br>
-              <h2 style="text-align:center;width:100%;color:#444">تغییر کلمه عبور</h2>
+              <h2 style="text-align:center;width:100%;color:#888">تغییر کلمه عبور</h2>
             </b-card-header>
             <b-card-body class="px-lg-5 py-lg-5">
               <div class="text-center text-muted mb-4">

@@ -23,11 +23,11 @@
         <select class="form-control" v-model="chain" @change="getfee()" style="font-family:'arial'">
           <option class="op" v-for="(item,name) in wallets.address" v-bind:key="name" :value="name" style="font-family:'arial'">{{name}}</option>
         </select><br>
-          <h6> مبلغ درخواستی <a type="button" v-if="!wallets.balance > 0" @click="amountset()" class="btn btn-dark" style="background:white;padding:3px;color:#444">  موجودی قابل انتقال : 0</a>  <a v-if="wallets.balance -( parseFloat(fee) + (parseFloat(fee)/2)) > 0" @click="amountset()" class="btn btn-dark" style="background:white;padding:3px;color:#444">  موجودی قابل انتقال : {{wallets.balance}}</a></h6>
+          <h6> مبلغ درخواستی <a type="button" v-if="!wallets.balance > 0" @click="amountset()" class="btn btn-dark" style="background:white;padding:3px;color:#888s">  موجودی قابل انتقال : 0</a>  <a v-if="wallets.balance -( parseFloat(fee) + (parseFloat(fee)/2)) > 0" @click="amountset()" class="btn btn-dark" style="background:white;padding:3px;color:#888s">  موجودی قابل انتقال : {{wallets.balance}}</a></h6>
           <b-input class="" v-model="amountout"></b-input><br>
           <h6> آدرس ولت </h6>
           <b-input class="" v-model="walletout"></b-input><br>
-          مبلغ دریافتی : <a  v-if="amountout - parseFloat(fee) < 0" @click="amountset()"  style="background:white;padding:3px;color:#444;font-family:'arial'">     0</a>  <a style="background:white;padding:3px;color:#444;font-family:'arial'" v-if="amountout - parseFloat(fee)  > 0" @click="amountset()"  >     {{amountout - parseFloat(fee)}}</a><br><br>
+          مبلغ دریافتی : <a  v-if="amountout - parseFloat(fee) < 0" @click="amountset()"  style="background:white;padding:3px;color:#888s;font-family:'arial'">     0</a>  <a style="background:white;padding:3px;color:#888s;font-family:'arial'" v-if="amountout - parseFloat(fee)  > 0" @click="amountset()"  >     {{amountout - parseFloat(fee)}}</a><br><br>
           <button id="withdraw" class="btn btn-dark">ثبت درخواست</button>
         </div>
         </form>
@@ -68,7 +68,7 @@
         <h2 class="row no-gutters align-items-center">تاریخچه</h2><br>
          <div class="table-responsive " style="margin-bottom:-20px" >
         <table class="table table-light" style="direction:rtl!important">
-          <thead class="" style="color:white!important;background:#444">
+          <thead class="" style="color:white!important;background:#888s">
             <tr>
               <th class="col-4 cent">مقدار</th>
               <th colspan="2" class="col-4 cent">زمان</th>
@@ -86,8 +86,8 @@
 
 
           <tr>
-              <th colspan="2" style="color:white!important;background:#444" class="col-6 cent">مجموع واریز</th>
-              <th colspan="2" style="color:white!important;background:#444" class="col-6 cent">مجموع برداشت</th>
+              <th colspan="2" style="color:white!important;background:#888s" class="col-6 cent">مجموع واریز</th>
+              <th colspan="2" style="color:white!important;background:#888s" class="col-6 cent">مجموع برداشت</th>
             </tr>
             <tr>
               <td colspan="2" class="col-6 cent">{{dall}}</td>

@@ -1,77 +1,20 @@
 <template>
-  <div class="main-content " style="width:100% ; position:absolute ; top:0" @scroll="scroll()">
-    <span style="position:absolute ; top:0 ; margin-right:44%; z-index:100"> <img class="d-md-none " style="width:40px; height:50px; " src="/img/brand/ars.png"></span>
-    <base-navb style="width:100%;position:absolute" id="nav"
-      :transparent="true"
-      menu-classes="justify-content-end"
-      class="navbar-horizontal navbar-main navbar-top navbar-dark"
-      expand="lg"
-    >
-     <template style="width:100%">
-        <div class="navbar-collapse-header">
-          <b-row>
-            <b-col cols="6" class="collapse-close">
-            </b-col>
-          </b-row>
-        </div>
-        <b-navbar-brand to="/">
-          <img class="d-none d-md-block " style="width:40px; height:50px" src="/img/brand/ars.png">
-        </b-navbar-brand>
-      <b-navbar-nav style="text-align:center"  class="align-items-lg-center ml-lg-auto" >
+<div>
+<LayoutNavbar />
+<router-view></router-view>
 
-           <b-nav-item to="/news">
-               <span class="nav-link-inner--text" style="color:#cecece"> اخبار </span>
-           </b-nav-item>
-           <b-nav-item to="/margin-trade/BTCUSDT">
-               <span class="nav-link-inner--text" style="color:#cecece"> بازار مارجین </span>
-           </b-nav-item>
-           <b-nav-item to="/perpetual-trade/BTCUSDT">
-               <span class="nav-link-inner--text" style="color:#cecece">بازار پرپشوال</span>
-           </b-nav-item>
-           <b-nav-item to="/wallets">
-               <span class="nav-link-inner--text" style="color:#cecece">کیف های من </span>
-           </b-nav-item>
-           <b-nav-item to="/aboutus">
-               <span class="nav-link-inner--text" style="color:#cecece">  درباره ما </span>
-           </b-nav-item>
-       </b-navbar-nav>
-        <b-navbar-nav style="margin-right"  class="align-items-lg-center mr-lg-auto">
-          <b-nav-item v-if="this.$store.state.isAuthenticated" to="/dashboard">
-               <span class="nav-link-inner--text btn btn-light" style="background: none; padding: 7px 15px; color: #fff"> داشبورد </span>
-           </b-nav-item>
-           <b-nav-item v-if="this.$store.state.isAuthenticated" to="/logout">
-               <span class="nav-link-inner--text btn btn-light" style="background: none; padding: 7px 15px; color: #fff"> خروج </span>
-           </b-nav-item>
-           <b-nav-item v-if="!this.$store.state.isAuthenticated" to="/register">
-               <span class="nav-link-inner--text btn btn-light" style="background: none; padding: 7px 15px; color: #777"> ثبت نام </span>
-           </b-nav-item>
-           <b-nav-item v-if="!this.$store.state.isAuthenticated" to="/login" style="float:left">
-               <span class="nav-link-inner--text btn btn-light" style="background: none; padding: 7px 15px; color: #777; margin-left:30px"> ورود </span>
-           </b-nav-item>
-       </b-navbar-nav>
-       
-     </template>
-    </base-navb>
-
-    <div class="main-content">
-      <zoom-center-transition
-        :duration="pageTransitionDuration"
-        mode="out-in"
-      >
-        <router-view></router-view>
-      </zoom-center-transition>
-    </div>
-
-  </div>
+</div>
 </template>
 <script>
   import { BaseNavb } from '@/components/';
   import { ZoomCenterTransition } from 'vue2-transitions';
+  import LayoutNavbar from './../../layout/LayoutNavbar2'
 
   export default {
     components: {
       BaseNavb,
-      ZoomCenterTransition
+      ZoomCenterTransition,
+      LayoutNavbar
     },
     props: {
       backgroundColor: {
@@ -94,25 +37,8 @@
       }
     },
     mounted () {
-      this.scroll()
     },
     methods: {
-      scroll () {
-      function myFunction() {
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            document.querySelector("#nav").style.position = "fixed";
-            document.querySelector("#nav").style.background = "rgb(0,0,0)";
-        }
-        else {
-          document.querySelector("#nav").style.position = "absolute";
-          document.querySelector("#nav").style.background = "rgb(0,0,0)";
-        }
-        setTimeout(() => {
-            myFunction()
-          }, 500)
-        }
-        myFunction()
-    },
       toggleNavbar() {
         document.body.classList.toggle('nav-open');
         this.showMenu = !this.showMenu;

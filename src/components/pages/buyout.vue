@@ -1,11 +1,11 @@
 <template>
   <div>
-        <b-card>              
-      <h3 style="float:right; color:#444" v-if="price && rialprice && this.sym !== 'USDT'">قیمت : <a style="font:20px 'arial'">{{price.buy *rialprice[0].rial * 1.007}}</a></h3>
-      <h3 style="float:left; color:#444" v-if="price && this.sym !== 'USDT'">قیمت دلاری : <a style="font:20px 'arial'">{{(price.buy )}}</a></h3>
+        <b-card v-if="price">              
+      <h3 style="float:right; color:#888" v-if="price && rialprice && this.sym !== 'USDT'">قیمت : <a style="font:20px 'arial'">{{price.buy *rialprice[0].rial * 1.007}}</a></h3>
+      <h3 style="float:left; color:#888" v-if="price && this.sym !== 'USDT'">قیمت دلاری : <a style="font:20px 'arial'">{{(price.buy )}}</a></h3>
 
-      <h3 style="float:right; color:#444" v-if="price && rialprice && this.sym === 'USDT'">قیمت : <a style="font:20px 'arial'">{{price.buy *rialprice[0].rial }}</a></h3>
-      <h3 style="float:left; color:#444" v-if="price && this.sym === 'USDT'">قیمت دلاری : <a style="font:20px 'arial'">{{(price.buy )}}</a></h3></b-card>
+      <h3 style="float:right; color:#888" v-if="price && rialprice && this.sym === 'USDT'">قیمت : <a style="font:20px 'arial'">{{price.buy *rialprice[0].rial }}</a></h3>
+      <h3 style="float:left; color:#888" v-if="price && this.sym === 'USDT'">قیمت دلاری : <a style="font:20px 'arial'">{{(price.buy )}}</a></h3></b-card>
     <b-card>
               <b-card-header class="row no-gutters align-items-center">خرید</b-card-header>
 
@@ -35,7 +35,7 @@
 
         <b-form-group label="">
           <b-card>
-        <h5 style="float:right; color:#444" v-if="price && rialprice">موجودی : <a @click="balanceset()" class="btn btn-dark" style="font:12px 'arial'; padding:5px 20px ; color:white">{{rial}}</a> ریال </h5>
+        <h5 style="float:right; color:#888" v-if="price && rialprice">موجودی : <a @click="balanceset()" class="btn btn-dark" style="font:12px 'arial'; padding:5px 20px ">{{rial}}</a> ریال </h5>
             <div class="input-group mb-3" style="direction:ltr ; margin:0">
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">|ریالی|</span>
@@ -44,11 +44,11 @@
             </div>
                         <table style="width:98%">
                 <tr>
-                  <td style="text-align:center; color:#444 ; font: 12px 'arial'">0%</td>
-                  <td style="text-align:center; color:#444 ; font: 12px 'arial'">25%</td>
-                  <td style="text-align:center; color:#444 ; font: 12px 'arial'">50%</td>
-                  <td style="text-align:center; color:#444 ; font: 12px 'arial'">75%</td>
-                  <td style="text-align:center; color:#444 ; font: 12px 'arial'">100%</td>
+                  <td style="text-align:center; color:#888 ; font: 12px 'arial'">0%</td>
+                  <td style="text-align:center; color:#888 ; font: 12px 'arial'">25%</td>
+                  <td style="text-align:center; color:#888 ; font: 12px 'arial'">50%</td>
+                  <td style="text-align:center; color:#888 ; font: 12px 'arial'">75%</td>
+                  <td style="text-align:center; color:#888 ; font: 12px 'arial'">100%</td>
                 </tr>
               </table>
                 <b-form-slider :ticks_tooltip="true" v-if="rial | rial === 0" :min="0" :max="rial" v-model="amount"></b-form-slider><br>
@@ -66,8 +66,8 @@
           <p style="margin:0"> آدرس:</p>
           <b-input autocomplete="off" type="text" v-model="address" placeholder=" آدرس " />
         </b-form-group>
-        <h5 style="float:right; color:#444" v-if="price && rialprice">هزینه جا به جایی : <a class="btn btn-dark" style="font:12px 'arial'; padding:5px 20px ; color:white"> {{ parseInt(fee * price.buy  * rialprice[0].rial * 1.07)}} ریال</a></h5><br><br>
-        <h5 style="float:right; color:#444" v-if="price && rialprice">دریافتی : <a v-if="getting > 0" class="btn btn-dark" style="font:12px 'arial'; padding:5px 20px ; color:white">{{getting}}</a><a v-else class="btn btn-dark" style="font:12px 'arial'; padding:5px 20px ; color:white">0</a></h5><br><br>
+        <h5 style="float:right; color:#888" v-if="price && rialprice">هزینه جا به جایی : <a class="btn btn-dark" style="font:12px 'arial'; padding:5px 20px "> {{ parseInt(fee * price.buy  * rialprice[0].rial * 1.07)}} ریال</a></h5><br><br>
+        <h5 style="float:right; color:#888" v-if="price && rialprice">دریافتی : <a v-if="getting > 0" class="btn btn-dark" style="font:12px 'arial'; padding:5px 20px ">{{getting}}</a><a v-else class="btn btn-dark" style="font:12px 'arial'; padding:5px 20px ">0</a></h5><br><br>
         <b-btn type="submit" id="submit" variant="dark">درخواست خرید</b-btn>
         </form>
       </fieldset>

@@ -3,13 +3,21 @@
     <div class="ban">
       <!-- Card stats -->
       
-      <b-row style="top:110px ; position:absolute ; height:300px ; width:100%">
+      <b-row style="top:170px ; position:absolute ; height:300px ; width:100%">
         <b-col style="background:none!important">
           <div class="mainban" style="height: 150px ;margin:auto; text-align:center">
             <h2 class="mainhead" style="">خرید و فروش امن بیت‌کوین و ارزهای دیجیتال</h2>
-            <h2 class="mainsubhead" style="color:black">به بزرگترین بازار ارز دیجیتال ایران بپیوندید</h2>
+            <h2 class="mainsubhead" style="color:black">به بزرگترین بازار ارز دیجیتال ایران بپیوندید</h2><br><br>
+            <div style="direction:rtl ; width:70%; margin:auto ; height:50px" class="input-group mb-3">
+              
+              <input style="text-align:center ; height:100% ; background: #dddddd ; color:#fff" :value="referalid" type="text" class="form-control" placeholder="ایمیل" aria-label="" aria-describedby="basic-addon1">
+              <div class="input-group-prepend">
+                <button class="btn btn-dark" type="button" style="padding:">هم اکنون ثبت نام کنید</button>
+              </div>
+            </div>
           </div>
         </b-col>
+
       </b-row>
     </div>
 
@@ -27,7 +35,7 @@
             </tr>
           </thead>
           </table>
-          <div class="table-responsive " style="margin-bottom:-20px; max-height:450px; overflow:auto ; background:white" >
+          <div class="table-responsive " style="margin-bottom:-20px; max-height:450px; overflow:auto " >
         <table class="table " style="direction:rtl!important">
           <tbody v-if="info" style="font:20px 'arial'; max-height:320px" >
             <tr v-if="pp[2] && ('USDT').includes(searchtext.toUpperCase())">
@@ -58,13 +66,13 @@
             </tr>
           </tfoot>
         </table>
-        </div>
+        </div><br><br><br>
         
 
-        <div class="col-12 d-none d-md-block" style="min-height:490px;background:#ffffff; padding:50px ; text-align:right">
-          <h2 style="text-align:center">چرا آمیزاکس ؟</h2><hr>
-          <div v-for="(item , idx) in bottom" v-bind:key="idx + 'e'" style="width:25% ; padding:2% ; height:100%;background:white ; margin:4% ; ; border-color: #ececec ; border-width:1px ; margin-top:0 ; float:left" class="cent">
-            <img style="width:150px ;height:150px" :src="item.get_pic" alt="">
+        <div class="col-12 d-none d-md-block" style="min-height:490px; padding:50px ; text-align:right">
+          <h2 style="text-align:center">چرا آمیزاکس ؟</h2><br><br>
+          <div v-for="(item , idx) in bottom" v-bind:key="idx + 'e'" style="width:25% ; padding:2% ; height:100%; margin:4% ; ; border-color: #ececec ; border-width:1px ; margin-top:0 ; float:left" class="cent">
+            <img style="width:180px ;height:180px" :src="item.get_pic" alt=""><br><br>
             <h4 class="cent">{{item.title}}</h4><br>
             <p>{{item.minitext}}</p>
           </div>
@@ -78,18 +86,18 @@
             <p >{{item.minitext}}</p>
           </div>
           
-        </div><br><br>
-        <h2 v-if="posts.length" style="background:#ffffff;height:40px; margin:0; padding:10px; text-align:center"><br> آخرین اخبار</h2>
-        <h2 style="background:#ffffff;height:40px; margin:0; padding:10px"><br> </h2>
-        <h2 style="background:#ffffff;height:40px; margin:0; padding:10px"><br> </h2>
-        <hr style="background:#ffffff;height:40px; margin:0; padding:10px">
+        </div><br><br><br><br>
+        <h2 v-if="posts.length" style="height:40px; margin:0; padding:10px; text-align:center"><br> آخرین اخبار</h2>
+        <h2 style="height:40px; margin:0; padding:10px"><br> </h2>
+        <h2 style="height:40px; margin:0; padding:10px"><br> </h2>
+        <br style="height:40px; margin:0; padding:10px"><br>
         
         
         
-        <div class="d-none d-md-block" v-for="(item , idx) in posts" v-bind:key="idx + 'g'" style="background:white ; padding-bottom:60px;" >
-                  <div   style="height:350px;background:rgb(244, 248, 249);width:80%;margin:auto;border-radius:10px;border:solid #dfdfdf .5px;  text-align:right">
+        <div class="d-none d-md-block" v-for="(item , idx) in posts" v-bind:key="idx + 'g'" style=" padding-bottom:60px;" >
+                  <div   style="height:350px;;width:80%;margin:auto;border:solid rgba(125,125,125,0.5) .5px;  text-align:right">
                     <div style="width:40%; float:right ; height:100%; padding-top:0">
-                      <img style="width:100%;height:100%;border-radius:0 10px 10px 0" :src="item.get_pic" alt="">
+                      <img style="width:100%;height:100%;" :src="item.get_pic" alt="">
                     </div>
                     <div style="width:60%; float:left; height:100% ; padding:10%; padding-top:5%">
                       <h4>{{item.title}} </h4>
@@ -101,10 +109,10 @@
 
 
 
-          <div class="d-md-none " v-for="(item , idx) in posts" v-bind:key="idx + 'h'" style="background:white ; padding-bottom:60px;" >
-                  <div   style="height:auto;background:rgb(244, 248, 249);width:80%;margin:auto;border-radius:10px;border:solid #dfdfdf .5px;  text-align:center">
+          <div class="d-md-none " v-for="(item , idx) in posts" v-bind:key="idx + 'h'" style=" padding-bottom:60px;" >
+                  <div   style="height:auto;;width:80%;margin:auto;border:solid rgba(125,125,125,0.5) .5px;  text-align:center">
                     <div style="width:100%;   height:100%; padding-top:0">
-                      <img style="width:100%;height:100%;border-radius: 10px 10px  0  0 " :src="item.get_pic" alt="">
+                      <img style="width:100%;height:100%;" :src="item.get_pic" alt="">
                     </div>
                     <div style="width:100%; height:100% ; padding:10%; padding-top:5%;  text-align:justify">
                       <h4>{{item.title}} ssss</h4>
@@ -194,6 +202,7 @@
   import Trend from 'vuetrend'
   import cryptocurrencies from 'cryptocurrencies'
   import { cryptoSymbol } from 'crypto-symbol'
+  import LayoutNavbar from './../layout/LayoutNavbar'
 
   const { get } = cryptoSymbol({})
   // Components
@@ -210,6 +219,7 @@
       StatsCard,
       PageVisitsTable,
       SocialTrafficTable,
+      LayoutNavbar
     },
     data() {
       return {
@@ -372,8 +382,8 @@
 </script>
 <style>
 .ban{
-  background: url('https://nobitex.ir/_nuxt/img/jumbotron.7888412.svg') no-repeat;
-  background-size: 155% 155%;
+  background: url('/IMG_6384.PNG') no-repeat;
+  background-size: 100% 100%;
   background-position-x:center;
   height:850px; 
   width:100%;
@@ -398,7 +408,13 @@
   font-weight:bolder
 }
 .mainban{
-  width:65%
+  width:65%;
+  background: rgba(255, 255, 255, 0.5);
+  height: 450px!important;
+  border-radius: 20px;
+  border-style: solid;
+  border-color: rgba(255, 255, 255, 0.8);
+  padding: 3%;
 }
 .coin{
   width:25%
@@ -426,11 +442,13 @@
 }
 .mainban{
   width:95%;
-  margin-top:-50px
+  margin-top:-50px;
+  height:auto!important;
+  padding: 3%;
 }
 .ban{
-  background: url('https://nobitex.ir/_nuxt/img/jumbotron.7888412.svg') no-repeat;
-  background-size: 170% 170%;
+  background: url('/IMG_6384.PNG') no-repeat;
+  background-size: 100% 100%;
   background-position-x:center;
   height:500px; 
   width:100%;

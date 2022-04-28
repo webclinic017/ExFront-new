@@ -61,10 +61,10 @@ body{
   text-align: right;
 }
 a , h1 ,h2 ,h3 ,h4 ,h5 ,h6 ,span, p{
-  color:#444
+  color:#888
 }
 .arscard{
-  background-color: #f5f5f5;
+  background-color: #ffff;
 }
 .chat-btn{
   position:fixed;left:20px;bottom:20px;width:80px;height:80px;background:#ffffff;border-radius:50%;
@@ -123,7 +123,7 @@ input{
   margin-right:5%!important
 }
 .slider-handle{
-  background-color: #444!important;
-  background-image: -webkit-gradient(linear,left top,left bottom,from(#444),to(#333))!important;
+  background-color: #888!important;
+  background-image: -webkit-gradient(linear,left top,left bottom,from(#888),to(#333))!important;
 }
 </style>

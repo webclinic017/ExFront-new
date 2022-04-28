@@ -256,7 +256,7 @@
         <b-card-body id="five" hidden>
          <div class="table-responsive " style="margin-bottom:-20px" >
         <table class="table table-light" style="direction:rtl!important; padding:10px">
-          <thead class="" style="color:white!important;background:#444">
+          <thead class="" style="color:white!important;background:#888">
             <tr>
               <th class="col-3 cent">نوع ارز</th>
               <th class="col-3 cent">مقدار</th>

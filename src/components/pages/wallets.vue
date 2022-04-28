@@ -325,7 +325,7 @@ text-align: center;
   background: #efefff;
 }
 a{
-  color:#444
+  color:#888
 }
 @media only screen and (max-width: 1024px) {
 .nmobile{

@@ -8,7 +8,7 @@
         <b-col lg="6" md="8" >
           <b-card no-body class=" border-0">
             <b-card-header class="bg-transparent pb-5"><br>
-              <h2 style="text-align:center;width:100%;color:#444">ثبت نام</h2>
+              <h2 style="text-align:center;width:100%;color:#888">ثبت نام</h2>
             </b-card-header>
             <b-card-body class="px-lg-5 py-lg-5">
               <Vcode style="direction:ltr" :show="isShow" @success="onSuccess" @close="onClose" successText="با موفقیت تایید شد" failText="موفق نشدید لطفا مجددا تلاش نمایید" sliderText="لطفا پازل را کامل نمایید" />

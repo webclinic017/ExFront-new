@@ -11,7 +11,7 @@
         <br><br>
         <h5 class="alert alert-danger" v-for="error in errors" v-bind:key="error">{{error}}</h5>
       
-        <h5 style="float:right; color:#444" v-if="currencies.amount">موجودی : <a @click="balanceset()" class="btn btn-dark" style="font:12px 'arial'; padding:5px 20px ; color:white">{{parseInt(currencies.amount)}}</a> ریال </h5><br>
+        <h5 style="float:right" v-if="currencies.amount">موجودی : <a @click="balanceset()" class="btn btn-dark" style="font:12px 'arial'; padding:5px 20px">{{parseInt(currencies.amount)}}</a> ریال </h5><br>
         <div style="clear: both"></div>
         <fieldset  class="demo-vertical-spacing-sm">
           <form action="">
