@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-card>             
+    <b-card v-if="price && rialprice">             
       <h3 style="float:right; color:#444" v-if="price && rialprice && this.sym !== 'USDT'">قیمت : <a style="font:20px 'arial'">{{price.buy *rialprice[0].rial * 1.007}}</a></h3>
       <h3 style="float:left; color:#444" v-if="price && this.sym !== 'USDT'">قیمت دلاری : <a style="font:20px 'arial'">{{(price.buy )}}</a></h3>
 
@@ -83,7 +83,7 @@ import bFormSlider from 'vue-bootstrap-slider/es/form-slider';
 import 'bootstrap-slider/dist/css/bootstrap-slider.css'
 
 export default {
-  name: 'pages-forums-list',
+  name: 'buy',
   metaInfo: {
     title: 'کیف ها'
   },

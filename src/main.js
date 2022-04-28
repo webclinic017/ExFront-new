@@ -96,37 +96,19 @@ const store = new Vuex.Store({
       state.isAdmin = false
     }
   },
-  actions: {
-  },
-  modules: {
-  }
 })
-Vue.directive('click-outside', {/* code */});
-/* eslint-disable no-new */
-setTimeout(() => {
-  new Vue({
-    el: '#app',
-    render: h => h(App),
-    router,
-    store,
-    components: { App },
-    template: '<App/>'
-  });
-}, 1500);
+new Vue({
+  el: '#app',
+  store: store,
+  render: h => h(App),
+  router,
+  components: { App },
+  template: '<App/>'
+});
+Vue.use(store)
 Vue.use(VueSweetalert2);
 
 Vue.use(VueLoading , {
   text: 'لطفا کمی صبر کنید', 
   background: 'rgba(0,0,0,0.5)',
 })
-
-import IdleVue from "idle-vue";
-
-const eventsHub = new Vue();
-
-Vue.use(IdleVue, {
-  eventEmitter: eventsHub,
-  store,
-  idleTime: 1800000, // 3 seconds
-  startAtIdle: false
-});

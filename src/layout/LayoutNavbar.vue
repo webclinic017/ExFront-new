@@ -21,129 +21,62 @@
       <hr class="d-lg-none w-100 my-2">
 
 
-      <b-navbar-nav class="align-items-lg-center ml-auto">
-        <b-nav-item-dropdown no-caret :right="!isRtlMode" class="demo-navbar-notifications mr-lg-3">
-          <template slot="button-content">
-            <i class="ion ion-md-notifications-outline navbar-icon align-middle"></i>
-            <span class="badge badge-primary badge-dot indicator"></span>
+      <b-navbar-nav @click="seen()" class="align-items-lg-center ml-auto">
+        <b-nav-item-dropdown v-if="$store.state.isAuthenticated" no-caret :right="!isRtlMode" class="demo-navbar-notifications mr-lg-3">
+          <template slot="button-content" @click="seen()">
+            <i @click="seen()" class="ion ion-md-notifications-outline navbar-icon align-middle"></i>
+            <span v-if="nunseen" class="badge badge-primary badge-dot indicator"></span>
             <span class="d-lg-none align-middle">&nbsp; Notifications</span>
           </template>
 
-          <div class="bg-primary text-center text-white font-weight-bold p-3">
-            4 New Notifications
-          </div>
-          <b-list-group flush>
-            <b-list-group-item href="javascript:void(0)" class="media d-flex align-items-center">
-              <div class="ui-icon ui-icon-sm ion ion-md-home bg-secondary border-0 text-white"></div>
+          <b-list-group style="max-height:480px ; overflow-y:auto" flush>
+            <b-list-group-item v-for="(item, idx) in notification" v-bind:key="idx + 'n'" href="javascript:void(0)" class="media d-flex align-items-center">
+              <div class="ui-icon ui-icon-sm ion ion-md-notifications-outline bg-secondary border-0 text-white"></div>
               <div class="media-body line-height-condenced ml-3">
-                <div class="text-body">Login from 192.168.1.1</div>
+                <div class="text-body" style="font-weight:normal; font-family:'yekan'; font-size: 16">{{item.title}}</div>
                 <div class="text-light small mt-1">
-                  Aliquam ex eros, imperdiet vulputate hendrerit et.
+                  {{item.text}}
                 </div>
-                <div class="text-light small mt-1">12h ago</div>
-              </div>
-            </b-list-group-item>
-
-            <b-list-group-item href="javascript:void(0)" class="media d-flex align-items-center">
-              <div class="ui-icon ui-icon-sm ion ion-md-person-add bg-info border-0 text-white"></div>
-              <div class="media-body line-height-condenced ml-3">
-                <div class="text-body">You have <strong>4</strong> new followers</div>
-                <div class="text-light small mt-1">
-                  Phasellus nunc nisl, posuere cursus pretium nec, dictum vehicula tellus.
-                </div>
-              </div>
-            </b-list-group-item>
-
-            <b-list-group-item href="javascript:void(0)" class="media d-flex align-items-center">
-              <div class="ui-icon ui-icon-sm ion ion-md-power bg-danger border-0 text-white"></div>
-              <div class="media-body line-height-condenced ml-3">
-                <div class="text-body">Server restarted</div>
-                <div class="text-light small mt-1">
-                  19h ago
-                </div>
-              </div>
-            </b-list-group-item>
-
-            <b-list-group-item href="javascript:void(0)" class="media d-flex align-items-center">
-              <div class="ui-icon ui-icon-sm ion ion-md-warning bg-warning border-0 text-body"></div>
-              <div class="media-body line-height-condenced ml-3">
-                <div class="text-body">99% server load</div>
-                <div class="text-light small mt-1">
-                  Etiam nec fringilla magna. Donec mi metus.
-                </div>
-                <div class="text-light small mt-1">
-                  20h ago
-                </div>
+                <div class="text-light small mt-1">{{item.get_age}}</div>
               </div>
             </b-list-group-item>
           </b-list-group>
 
-          <a href="javascript:void(0)" class="d-block text-center text-light small p-2 my-1">Show all notifications</a>
+          <a v-if="!notification.length" href="javascript:void(0)" class="d-block text-center text-light small p-2 my-1">No Notification Yet</a>
         </b-nav-item-dropdown>
 
-        <b-nav-item-dropdown no-caret :right="!isRtlMode" class="demo-navbar-messages mr-lg-3">
-          <template slot="button-content">
-            <i class="ion ion-ios-mail navbar-icon align-middle"></i>
-            <span class="badge badge-primary badge-dot indicator"></span>
+        <b-nav-item-dropdown @click="read()" v-if="$store.state.isAuthenticated" no-caret :right="!isRtlMode" class="demo-navbar-messages mr-lg-3">
+          <template slot="button-content" @click="read()">
+            <i @click="read()" class="ion ion-ios-mail navbar-icon align-middle"></i>
+            <span v-if="tunseen" class="badge badge-primary badge-dot indicator"></span>
             <span class="d-lg-none align-middle">&nbsp; Messages</span>
           </template>
 
-          <div class="bg-primary text-center text-white font-weight-bold p-3">
-            4 New Messages
-          </div>
           <b-list-group flush>
-            <b-list-group-item href="javascript:void(0)" class="media d-flex align-items-center">
-              <img :src="`${publicUrl}img/avatars/6-small.png`" class="d-block ui-w-40 rounded-circle" alt>
+            <b-list-group-item v-for="(item, idx) in tickets" v-bind:key="idx + 't'" href="javascript:void(0)" class="media d-flex align-items-center">
+              <i class="ion ion-ios-mail navbar-icon align-middle"></i>
               <div class="media-body ml-3">
-                <div class="text-body line-height-condenced">Sit meis deleniti eu, pri vidit meliore docendi ut.</div>
+                <div class="text-body line-height-condenced">{{item.title}}</div>
                 <div class="text-light small mt-1">
-                  Mae Gibson &nbsp;·&nbsp; 58m ago
+                  {{item.text}}
+                </div><br>
+                <div class="text-light small mt-1">
+                  {{item.get_age}}
                 </div>
               </div>
             </b-list-group-item>
-
-            <b-list-group-item href="javascript:void(0)" class="media d-flex align-items-center">
-              <img :src="`${publicUrl}img/avatars/4-small.png`" class="d-block ui-w-40 rounded-circle" alt>
-              <div class="media-body ml-3">
-                <div class="text-body line-height-condenced">Mea et legere fuisset, ius amet purto luptatum te.</div>
-                <div class="text-light small mt-1">
-                  Kenneth Frazier &nbsp;·&nbsp; 1h ago
-                </div>
-              </div>
-            </b-list-group-item>
-
-            <b-list-group-item href="javascript:void(0)" class="media d-flex align-items-center">
-              <img :src="`${publicUrl}img/avatars/5-small.png`" class="d-block ui-w-40 rounded-circle" alt>
-              <div class="media-body ml-3">
-                <div class="text-body line-height-condenced">Sit meis deleniti eu, pri vidit meliore docendi ut.</div>
-                <div class="text-light small mt-1">
-                  Nelle Maxwell &nbsp;·&nbsp; 2h ago
-                </div>
-              </div>
-            </b-list-group-item>
-
-            <b-list-group-item href="javascript:void(0)" class="media d-flex align-items-center">
-              <img :src="`${publicUrl}img/avatars/11-small.png`" class="d-block ui-w-40 rounded-circle" alt>
-              <div class="media-body ml-3">
-                <div class="text-body line-height-condenced">Lorem ipsum dolor sit amet, vis erat denique in, dicunt prodesset te vix.</div>
-                <div class="text-light small mt-1">
-                  Belle Ross &nbsp;·&nbsp; 5h ago
-                </div>
-              </div>
-            </b-list-group-item>
+            <a v-if="!tickets.length" href="javascript:void(0)" class="text-center text-light font-weight-bold p-3">No Tickets Yet</a>
           </b-list-group>
-
-          <a href="javascript:void(0)" class="d-block text-center text-light small p-2 my-1">Show all messages</a>
+            <a href="/ticketadd" style="margin:0!important" class="bg-primary text-white d-block text-center small p-2 my-1">New Ticket</a>
         </b-nav-item-dropdown>
 
         <!-- Divider -->
         <div class="nav-item d-none d-lg-block text-big font-weight-light line-height-1 opacity-25 mr-3 ml-1">|</div>
 
-        <b-nav-item-dropdown :right="!isRtlMode" class="demo-navbar-user">
+        <b-nav-item-dropdown v-if="$store.state.isAuthenticated" :right="!isRtlMode" class="demo-navbar-user">
           <template slot="button-content">
             <span class="d-inline-flex flex-lg-row-reverse align-items-center align-middle">
-              <img :src="`${publicUrl}img/avatars/1.png`" alt class="d-block ui-w-30 rounded-circle">
-              <span class="px-1 mr-lg-2 ml-2 ml-lg-0">Mike Greene</span>
+              <i style="font-size:32px" class="ion ion-ios-person text-light"></i>
             </span>
           </template>
 
@@ -159,6 +92,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'app-layout-navbar',
 
@@ -168,8 +103,74 @@ export default {
       default: true
     }
   },
-
+  data(){
+    return {
+      notification: [],
+      tickets: [],
+    }
+  },
+  mounted(){
+    this.pre()
+  },
   methods: {
+    pre(){
+      if(this.$store.state.isAuthenticated){
+        this.get_notifications()
+        this.get_tickets()
+      }
+    },
+    async get_notifications () {
+      await axios
+        .get('/notifications')
+        .then(response => {
+          this.notification = response.data.reverse()
+          var i = 0
+          for (var item in response.data) {
+            if (!response.data[i].seen) {
+              this.nunseen = true
+            }
+            item.reverse()
+            i++
+          }
+        })
+        .catch(() => {
+        })
+    },
+    async get_tickets () {
+      await axios
+        .get('/subject')
+        .then(response => {
+          this.tickets = response.data.reverse()
+          var i = 0
+          for (var item in response.data) {
+            if (!response.data[i].read) {
+              this.tunseen = true
+            }
+            item.reverse()
+            i++
+          }
+        })
+        .catch(() => {
+        })
+    },
+    async read () {
+      await axios
+        .put('/subject')
+        .then(response => {
+          this.tunseen = false
+        })
+        .catch(() => {
+        })
+    },
+    async seen () {
+      await axios
+        .post('/notifications')
+        .then(response => {
+          this.nunseen = false
+        })
+        .catch(() => {
+        })
+    },
     toggleSidenav () {
       this.layoutHelpers.toggleCollapsed()
     },

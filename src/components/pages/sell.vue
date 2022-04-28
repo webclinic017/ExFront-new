@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-card> 
+    <b-card v-if="price && rialprice"> 
       <h3 v-if="this.sym !== 'USDT' && price && rialprice" style="float:right; color:#444" >قیمت ریالی : <a style="font:20px 'arial'">{{price.buy *rialprice[0].rial * 1.002}}</a></h3>
       <h3 v-if="this.sym !== 'USDT' && price" style="float:left; color:#444" >قیمت دلاری : <a style="font:20px 'arial'">{{(price.buy )}}</a></h3>
 
@@ -112,7 +112,7 @@ export default {
     sym:'',
     rialprice: 0,
     userfee: 0 ,
-    price: [],
+    price: false,
     rial: 0,
     getting: 0
   }),

@@ -1,9 +1,9 @@
 <template>
   <div>
-    <b-card> 
+    <b-card v-if="sym && sym2  && price && price2"> 
       <h3 v-if="sym && sym2  && price && price2" style="float:right; color:#444" > قیمت نسبی ارز  ها: <a style="font:20px 'arial'">{{this.price.buy  / this.price2.buy }}</a></h3>
       </b-card>
-        <b-card-header class="row no-gutters align-items-center">فروش</b-card-header>
+        <b-card-header class="row no-gutters align-items-center">تبدیل</b-card-header>
 
            
         <div style="clear:both"></div>
@@ -79,12 +79,6 @@
         <b-btn @click="submit()" id="submit" variant="dark">درخواست تبدیل</b-btn>
       </fieldset>
       </b-card><br><br>
-    <b-card>
-      <div style="margin:auto" id="tradingview_1be21"></div><br>
-
-    </b-card><br>
-    
-        
   </div>
 </template>
 

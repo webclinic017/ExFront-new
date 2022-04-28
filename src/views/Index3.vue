@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="ban">
+    <div class="banc">
       <!-- Card stats -->
       
       <b-row style="top:110px ; position:absolute ; height:300px ; width:100%">
@@ -371,9 +371,9 @@
   };
 </script>
 <style>
-.ban{
-  background: url('https://nobitex.ir/_nuxt/img/jumbotron.7888412.svg') no-repeat;
-  background-size: 155% 155%;
+.banc{
+  background: url('/3.jpeg') no-repeat;
+  background-size: 100% 100%;
   background-position-x:center;
   height:850px; 
   width:100%;
@@ -420,7 +420,7 @@
   font:18px 'yekan';
   color:black;
 }
-.ban{
+.banc{
   height:500px; 
   width:100%;
 }
@@ -428,9 +428,9 @@
   width:95%;
   margin-top:-50px
 }
-.ban{
-  background: url('https://nobitex.ir/_nuxt/img/jumbotron.7888412.svg') no-repeat;
-  background-size: 170% 170%;
+.banc{
+  background: url('/3.jpeg') no-repeat;
+  background-size: 100% 100%;
   background-position-x:center;
   height:500px; 
   width:100%;

@@ -1,68 +1,106 @@
 <template>
   <div>
     <h4 class="font-weight-bold py-3 mb-4">
-      Dashboard
-      <div class="text-muted text-tiny mt-1"><small class="font-weight-normal">Today is Tuesday, 8 February 2018</small></div>
+      داشبورد
+      <div class="text-muted text-tiny mt-1"><small class="font-weight-normal">Today is {{date}}</small></div>
     </h4>
 
     <!-- Counters -->
     <div class="row">
-      <div class="col-sm-6 col-xl-3">
+      <div class="col-sm-6 col-xl-6">
 
         <b-card class="mb-4">
           <div class="d-flex align-items-center">
             <div class="lnr lnr-cart display-4 text-success"></div>
-            <div class="ml-3">
-              <div class="text-muted small">Monthly sales</div>
-              <div class="text-large">2362</div>
+            <div class="ml-4">
+              <div class="text-muted small">دارایی ریالی</div>
+              <div class="text-large">{{parseInt(dashboardinfo.balance)}} <a v-if="!dashboardinfo.balance">0</a> ریال</div>
+            </div>
+          </div>
+        </b-card>
+      </div>
+        <div class="col-sm-6 col-xl-6">
+        <b-card class="mb-4">
+          <div class="d-flex align-items-center">
+            <div class="lnr lnr-cart display-4 text-success"></div>
+            <div class="ml-4">
+              <div class="text-muted small">مجموع دارایی دیجیتال به دلار</div>
+              <div class="text-large">{{parseInt(dashboardinfo.usbalance)}} <a v-if="!dashboardinfo.usbalance">0</a> ریال</div>
             </div>
           </div>
         </b-card>
 
       </div>
-      <div class="col-sm-6 col-xl-3">
+      <div class="col-sm-6 col-xl-6">
 
         <b-card class="mb-4">
           <div class="d-flex align-items-center">
             <div class="lnr lnr-earth display-4 text-info"></div>
-            <div class="ml-3">
-              <div class="text-muted small">Monthly visits</div>
-              <div class="text-large">687,123</div>
+            <div class="ml-4">
+              <div class="text-muted small">تعداد ارز های شما</div>
+              <div class="text-large">{{dashboardinfo.curcount}}</div>
             </div>
           </div>
         </b-card>
 
       </div>
-      <div class="col-sm-6 col-xl-3">
+      <div class="col-sm-6 col-xl-6">
 
         <b-card class="mb-4">
           <div class="d-flex align-items-center">
             <div class="lnr lnr-gift display-4 text-danger"></div>
-            <div class="ml-3">
-              <div class="text-muted small">Products</div>
-              <div class="text-large">985</div>
+            <div class="ml-4">
+              <div class="text-muted small">تیکت های بی پاسخ</div>
+              <div class="text-large">{{unread}}</div>
             </div>
           </div>
         </b-card>
 
       </div>
-      <div class="col-sm-6 col-xl-3">
+      <div class="col-12">
+        <div style="clear:both"></div>
 
-        <b-card class="mb-4">
-          <div class="d-flex align-items-center">
-            <div class="lnr lnr-users display-4 text-warning"></div>
-            <div class="ml-3">
-              <div class="text-muted small">Users</div>
-              <div class="text-large">105,652</div>
-            </div>
-          </div>
-        </b-card>
+         <b-card>
+         <b-card-header>
+           <h3>لینک دعوت دوستان</h3>
+         </b-card-header>
+         <div style="direction:rtl" class="input-group mb-3">
+  <div class="input-group-prepend">
+    <button class="btn btn-outline-success" type="button">copy</button>
+  </div>
+  <input style="text-align:center" :value="referalid" type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+</div>
+          </b-card><br><br>
+
+      </div>
+      <div class="col-12">
+        <div style="clear:both"></div>
+
+         <b-tabs>
+
+           <b-tab title="خرید">
+             <b-card>
+                <buy />
+              </b-card>
+            </b-tab>
+            <b-tab title="فروش">
+             <b-card>
+                <sell />
+              </b-card>
+            </b-tab>
+            <b-tab title="تبدیل">
+             <b-card>
+                <exchange />
+              </b-card>
+            </b-tab>
+
+          </b-tabs><br><br>
 
       </div>
     </div>
     <!-- / Counters -->
-
     <!-- Statistics -->
+    <!-- /
     <b-card no-body class="mb-4">
       <b-card-header header-tag="h6" class="with-elements">
         <div class="card-header-title">Statistics</div>
@@ -91,7 +129,6 @@
         <div class="col-md-4 col-lg-12 col-xl-4">
           <b-card-body>
 
-            <!-- Numbers -->
             <div class="row">
               <div class="col-6 col-xl-5 text-muted mb-3">Total sales</div>
               <div class="col-6 col-xl-7 mb-3">
@@ -119,17 +156,14 @@
                 <sup class="text-success">+12%</sup>
               </div>
             </div>
-            <!-- / Numbers -->
 
           </b-card-body>
         </div>
       </div>
     </b-card>
-    <!-- / Statistics -->
 
     <div class="row">
 
-      <!-- Charts -->
       <div class="col-sm-6 col-xl-4">
 
         <b-card no-body class="mb-4">
@@ -222,14 +256,11 @@
         </b-card>
 
       </div>
-      <!-- / Charts -->
-
       <div class="col-xl-9">
 
         <div class="row">
           <div class="col-md-6">
 
-            <!-- Tasks -->
             <b-card no-body class="mb-4">
               <b-card-header header-tag="h6" class="with-elements">
                 <div class="card-header-title">Tasks</div>
@@ -270,12 +301,10 @@
                 </b-input-group>
               </b-card-footer>
             </b-card>
-            <!-- / Tasks -->
 
           </div>
           <div class="col-md-6">
 
-            <!-- Team ToDo -->
             <b-card no-body class="mb-4">
               <b-card-header header-tag="h6" class="with-elements">
                 <div class="card-header-title">Team TODO</div>
@@ -312,7 +341,6 @@
                 </b-card-body>
               </perfect-scrollbar>
             </b-card>
-            <!-- / Team ToDo -->
 
           </div>
         </div>
@@ -320,7 +348,6 @@
       </div>
       <div class="col-md-8">
 
-        <!-- Sale stats -->
         <b-card no-body class="mb-4">
           <b-card-header header-tag="h6" class="with-elements">
             <div class="card-header-title">Sale stats</div>
@@ -367,12 +394,10 @@
             </table>
           </div>
         </b-card>
-        <!-- / Sale stats -->
 
       </div>
       <div class="col-md-4">
 
-        <!-- Type gadgets chart -->
         <b-card no-body class="mb-4">
           <b-card-header header-tag="h6" class="with-elements">
             <div class="card-header-title">Type gadgets</div>
@@ -384,12 +409,10 @@
             <dashboard1-chart6 :height="162" />
           </div>
         </b-card>
-        <!-- / Type gadgets chart -->
 
       </div>
       <div class="col-md-6 col-lg-12 col-xl-6">
 
-        <!-- Comments -->
         <b-card no-body class="mb-4">
           <b-card-header header-tag="h6">Comments</b-card-header>
           <b-card-body>
@@ -450,12 +473,10 @@
           </b-card-body>
           <a href="javascript:void(0)" class="card-footer d-block text-center text-body small font-weight-semibold">SHOW MORE</a>
         </b-card>
-        <!-- / Comments -->
 
       </div>
       <div class="col-md-6 col-lg-12 col-xl-6">
 
-        <!-- Support tickets -->
         <b-card no-body class="mb-4">
           <b-card-header header-tag="h6">Support tickets</b-card-header>
           <b-card-body>
@@ -497,18 +518,22 @@
           </b-card-body>
           <a href="javascript:void(0)" class="card-footer d-block text-center text-body small font-weight-semibold">SHOW MORE</a>
         </b-card>
-        <!-- / Support tickets -->
-
+        
       </div>
     </div>
+      Support tickets -->
   </div>
 </template>
 
 <script>
 import Vue from 'vue'
+import axios from 'axios'
 import VueChartJs from 'vue-chartjs'
 import PerfectScrollbar from '@/vendor/libs/perfect-scrollbar/PerfectScrollbar'
 import themeSettings from '../../vendor/libs/theme-settings/theme-settings'
+import { buy } from './../pages'
+import { sell } from './../pages'
+import { exchange } from './../pages'
 
 const isDarkStyle = themeSettings.isDarkStyle()
 
@@ -730,13 +755,108 @@ export default {
     title: 'Dashboard 1 - Dashboards'
   },
   components: {
-    PerfectScrollbar
+    PerfectScrollbar,
+    buy,
+    sell,
+    exchange
+  },
+  data() {
+      return {
+        referalid: '',
+        sym : 'BTCUSDT',
+        dashboardinfo : [],
+        leverage : [],
+        currenciescount: 0,
+        unread:0,
+      }
+    },
+    methods: {
+      tv () {
+      new TradingView.widget(
+        {
+        "width": screen.width * .7,
+        "height": 390,
+        "symbol": `${this.sym}`,
+        "timezone": "Etc/UTC",
+        "theme": "light",
+        "style": "1",
+        "locale": "en",
+        "enable_publishing": false,
+        "allow_symbol_change": true,
+        "container_id": "tradingview_1be21"
+      });
+    },
+      async get_history () {
+      await axios
+        .get('/pricehistory')
+        .then(response => {
+          for (item of response.data){
+          }
+        })
+        .catch(data => {
+          
+        })
+    },
+    async currencies () {
+      await axios
+        .get('/cp_mg_main')
+        .then(response => {
+          console(response)
+          for (item of response.data){
+            this.currenciescount = response.data.length
+          }
+        })
+        .catch(data => {
+          
+        })
+    },
+    async get_info () {
+      await axios
+        .get('/dashboardinfo')
+        .then(response => {
+          this.dashboardinfo = response.data[0]
+        })
+    },
+    async get_unread () {
+      await axios
+        .get('/unread')
+        .then(response => {
+          this.unread = response.data
+        })
+    },
+    async getlev () {
+      await axios
+        .get('/leverages')
+        .then(response => {
+          this.leverage = response.data
+        })
+    },
+    async get_user () {
+      await axios
+        .get('/userinfo')
+        .then(response => {
+          this.referalid = response.data[0].get_referal
+          console.log(response)
+        })
+    },
   },
 
   // Resize charts
   //
+  computed:{
+    date(){
+      var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      return new Date().toLocaleDateString("en-US", options)
+    }
+  },
 
   mounted () {
+    this.get_history()
+    this.get_info()
+    this.getlev()
+    this.currencies()
+    this.get_unread()
+    this.get_user()
     const charts = this.$children.filter(component => /-chart\d+$/.test(component.$options._componentTag))
 
     const resizeCharts = () => charts.forEach(chart => chart._data._chart.resize())
@@ -752,3 +872,9 @@ export default {
   }
 }
 </script>
+<style>
+.el-table .cell{
+  padding-left: 0px;
+  padding-right: 0px;
+}
+</style>

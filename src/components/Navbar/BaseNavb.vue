@@ -3,21 +3,6 @@
     <div :class="containerClasses">
       <slot name="brand"></slot>
 
-      <slot name="toggle-button">
-        <button
-          class="navbar-toggler collapsed"
-          v-if="hasMenu"
-          type="button"
-          @click="toggleMenu"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-bar navbar-kebab"></span>
-          <span class="navbar-toggler-bar navbar-kebab"></span>
-          <span class="navbar-toggler-bar navbar-kebab"></span>
-        </button>
-      </slot>
-
       <b-navbar-toggle
         target="nav-text-collapse"
         @click.stop="toggleMenu">
@@ -38,7 +23,7 @@
 </template>
 <script>
 export default {
-  name: 'base-nav',
+  name: 'base-navb',
   props: {
     show: {
       type: Boolean,

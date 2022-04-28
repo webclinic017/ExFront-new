@@ -1,27 +1,23 @@
 <template>
   <div class="main-content " style="width:100% ; position:absolute ; top:0" @scroll="scroll()">
-    <base-nav style="width:100%;position:absolute" id="nav"
+    <span style="position:absolute ; top:0 ; margin-right:44%; z-index:100"> <img class="d-md-none " style="width:40px; height:50px; " src="/img/brand/ars.png"></span>
+    <base-navb style="width:100%;position:absolute" id="nav"
       :transparent="true"
       menu-classes="justify-content-end"
       class="navbar-horizontal navbar-main navbar-top navbar-dark"
       expand="lg"
     >
-
      <template style="width:100%">
-       <div class="navbar-collapse-header">
-         <b-row>
-           <b-col cols="6" class="collapse-close">
-             <button type="button" class="navbar-toggler" @click="showMenu = false">
-               <span></span>
-               <span></span>
-             </button>
-           </b-col>
-         </b-row>
-       </div>
-       <b-navbar-brand to="/">
-          <img style="width:40px; height:50px" src="/img/brand/ars.png">
+        <div class="navbar-collapse-header">
+          <b-row>
+            <b-col cols="6" class="collapse-close">
+            </b-col>
+          </b-row>
+        </div>
+        <b-navbar-brand to="/">
+          <img class="d-none d-md-block " style="width:40px; height:50px" src="/img/brand/ars.png">
         </b-navbar-brand>
-      <b-navbar-nav  class="align-items-lg-center ml-lg-auto" >
+      <b-navbar-nav style="text-align:center"  class="align-items-lg-center ml-lg-auto" >
 
            <b-nav-item to="/news">
                <span class="nav-link-inner--text" style="color:#cecece"> اخبار </span>
@@ -39,7 +35,7 @@
                <span class="nav-link-inner--text" style="color:#cecece">  درباره ما </span>
            </b-nav-item>
        </b-navbar-nav>
-        <b-navbar-nav style="margin-right:200px"  class="align-items-lg-center mr-lg-auto">
+        <b-navbar-nav style="margin-right"  class="align-items-lg-center mr-lg-auto">
           <b-nav-item v-if="this.$store.state.isAuthenticated" to="/dashboard">
                <span class="nav-link-inner--text btn btn-light" style="background: none; padding: 7px 15px; color: #fff"> داشبورد </span>
            </b-nav-item>
@@ -55,7 +51,7 @@
        </b-navbar-nav>
        
      </template>
-    </base-nav>
+    </base-navb>
 
     <div class="main-content">
       <zoom-center-transition
@@ -69,12 +65,12 @@
   </div>
 </template>
 <script>
-  import { BaseNav } from '@/components/';
+  import { BaseNavb } from '@/components/';
   import { ZoomCenterTransition } from 'vue2-transitions';
 
   export default {
     components: {
-      BaseNav,
+      BaseNavb,
       ZoomCenterTransition
     },
     props: {
