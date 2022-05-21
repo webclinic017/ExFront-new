@@ -205,7 +205,7 @@ export default {
     },
     async getprices () {
       await axios
-        .get(`/oltradeinfo`)
+        .get(`/oltradeinfo3`)
         .then(response => {
           this.prices = response.data
           this.getw2()

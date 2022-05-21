@@ -4,11 +4,11 @@
     <!-- Brand demo (see demo.css) -->
     <b-navbar-brand to="/" class="app-brand demo py-0 mr-4 pc">
         <img  src="/img/logo.png" style="width:32px ; height: 32px" alt="">
-      <span class="app-brand-text demo font-weight-normal ml-2">AMIZAX</span>
+      <span class="app-brand-text demo font-weight-normal ml-2"><h style="color:rgb(206, 206, 206);font-size:22px; font-weight:bold ; margin-right: 10px">آمیزاکس</h></span>
     </b-navbar-brand>
     <b-navbar-brand to="/" class="app-brand demo py-0  mob">
         <img  src="/img/logo.png" style="width:32px ; height: 32px" alt="">
-      <span class="app-brand-text demo font-weight-normal ml-2">AMIZAX</span>
+      <span class="app-brand-text demo font-weight-normal ml-2"><h style="color:rgb(206, 206, 206);font-size:22px; font-weight:bold ; margin-right: 10px">آمیزاکس</h></span>
     </b-navbar-brand>
 
     <b-navbar-toggle style="position:absolute; top:5px ; right:5px" target="app-layout-navbar2"></b-navbar-toggle>
@@ -44,9 +44,9 @@
     </b-collapse>
     
 
-    <b-navbar-toggle style="position:absolute; top:5px ; left:5px" target="app-layout-navbar"></b-navbar-toggle>
+    <b-navbar-toggle v-if="this.$store.state.isAuthenticated" style="position:absolute; top:5px ; left:5px" target="app-layout-navbar"></b-navbar-toggle>
 
-    <b-collapse is-nav id="app-layout-navbar">
+    <b-collapse v-if="this.$store.state.isAuthenticated" is-nav id="app-layout-navbar">
       <!-- Divider -->
       <hr class="d-lg-none w-100 my-2">
 
@@ -124,6 +124,28 @@
         </b-nav-item-dropdown>
       </b-navbar-nav>
     </b-collapse>
+
+    <b-collapse v-if="!this.$store.state.isAuthenticated" is-nav id="app-layout-navbar">
+
+      <b-collapse v-if="!this.$store.state.isAuthenticated" is-nav id="app-layout-navbar">
+      <!-- Divider -->
+      <hr class="d-lg-none w-100 my-2">
+
+
+      <b-navbar-nav @click="seen()" class="align-items-lg-center ml-auto">
+        <b-nav-item>
+          <template >
+            <button class="btn btn-success">ورود</button>
+          </template>
+        </b-nav-item>
+        <b-nav-item>
+          <template >
+            <button class="btn btn-primary">ثبت نام</button>
+          </template>
+        </b-nav-item>
+      </b-navbar-nav>
+    </b-collapse>
+
   </b-navbar>
 </template>
 
@@ -151,7 +173,7 @@ export default {
   },
   computed:{
     darkness (){
-      if (localStorage.getItem('themeSettingsStyle') === 'dark'){
+      if (localStorage.getItem('themeSettingsStyle') === 'material'){
         return true
       }else{
         return false
@@ -160,10 +182,10 @@ export default {
   },
   methods: {
     darkswitch(){
-      if(localStorage.getItem('themeSettingsStyle') === 'dark'){
+      if(localStorage.getItem('themeSettingsStyle') === 'material'){
         themeSettings.setStyle('light')
       }else{
-        themeSettings.setStyle('dark')
+        themeSettings.setStyle('material')
       }
     },
     pre(){

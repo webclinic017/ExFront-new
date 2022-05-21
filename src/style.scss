@@ -1,6 +1,5 @@
-@import "./demo";
-@import "~@/vendor/styles/_appwork/functions";
-@import "~@/vendor/styles/_custom-variables/features";
+@import "~@/vendor/styles/_appwork/_functions";
+@import "~@/vendor/styles/_custom-variables/_features";
 
 $b-table-sort-icon: "data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 17 23'%3E%3Cg stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cpath fill='_TOP_COLOR_' d='M14.8284271,12.3431458 L16.9497475,14.4644661 L10.6212525,20.7931458 L10.6568542,20.8284271 L8.53553391,22.9497475 L8.50025253,22.9141458 L8.46446609,22.9497475 L6.34314575,20.8284271 L6.37825253,20.7921458 L0.0502525317,14.4644661 L2.17157288,12.3431458 L8.49925253,18.6711458 L14.8284271,12.3431458 Z'%3E%3C/path%3E%3Cpath fill='_BOTTOM_COLOR_' d='M14.7781746,4.08562073e-14 L16.8994949,2.12132034 L10.571,8.45 L10.6066017,8.48528137 L8.48528137,10.6066017 L8.45,10.571 L8.41421356,10.6066017 L6.29289322,8.48528137 L6.328,8.449 L-4.4408921e-16,2.12132034 L2.12132034,1.46549439e-14 L8.449,6.328 L14.7781746,4.08562073e-14 Z' transform='translate(8.449747,5.303301) scale(1,-1) translate(-8.449747,-5.303301)'%3E%3C/path%3E%3C/g%3E%3C/svg%3E";
 

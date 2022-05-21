@@ -4,7 +4,7 @@
     <!-- Brand demo (see demo.css) -->
     <b-navbar-brand to="/" class="app-brand demo d-lg-none py-0 mr-4">
         <img  src="/img/logo.png" style="width:32px ; height: 32px" alt="">
-      <span class="app-brand-text demo font-weight-normal ml-2">AMIZAX</span>
+      <span class="app-brand-text demo font-weight-normal ml-2"><h style="color:rgb(206, 206, 206);font-size:22px; font-weight:bold ; margin-right: 10px">آمیزاکس</h></span>
     </b-navbar-brand>
 
     <!-- Sidenav toggle (see demo.css) -->
@@ -22,6 +22,18 @@
 
 
       <b-navbar-nav @click="seen()" class="align-items-lg-center ml-auto">
+        <b-nav-item>
+          <template >
+            <div v-if="!darkness">
+            <i  class="ion ion-md-moon navbar-icon align-middle" style="margin-left:12px ; margin-right:12px"  @click="darkswitch"></i>
+            <span class="d-lg-none align-middle">&nbsp; Dark Mode</span>
+            </div>
+            <div v-else>
+            <i class="ion ion-md-sunny navbar-icon align-middle" style="margin-left:12px ; margin-right:12px "  @click="darkswitch"></i>
+            <span class="d-lg-none align-middle">&nbsp; Light Mode</span>
+            </div>
+          </template>
+        </b-nav-item>
         <b-nav-item-dropdown v-if="$store.state.isAuthenticated" no-caret :right="!isRtlMode" class="demo-navbar-notifications mr-lg-3">
           <template slot="button-content" @click="seen()">
             <i @click="seen()" class="ion ion-md-notifications-outline navbar-icon align-middle"></i>
@@ -93,6 +105,7 @@
 
 <script>
 import axios from 'axios'
+import themeSettings from '@/vendor/libs/theme-settings/theme-settings.js'
 
 export default {
   name: 'app-layout-navbar',
@@ -112,7 +125,23 @@ export default {
   mounted(){
     this.pre()
   },
+  computed:{
+    darkness (){
+      if (localStorage.getItem('themeSettingsStyle') === 'material'){
+        return true
+      }else{
+        return false
+      }
+    }
+  },
   methods: {
+    darkswitch(){
+      if(localStorage.getItem('themeSettingsStyle') === 'material'){
+        themeSettings.setStyle('light')
+      }else{
+        themeSettings.setStyle('material')
+      }
+    },
     pre(){
       if(this.$store.state.isAuthenticated){
         this.get_notifications()

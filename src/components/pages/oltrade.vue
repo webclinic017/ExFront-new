@@ -1,10 +1,5 @@
 <template>
-  <div  style="direction:ltr;overflow-x:auto;width:1275px;margin:auto" v-cloak id="trader"><br>
-    <h4 class="d-flex flex-wrap justify-content-between align-items-center pt-3 mb-4">
-      <div class="col-12 col-md-3 p-0 mb-3">
-      </div>
-    </h4>
-
+  <div  style="direction:ltr;overflow-x:auto;width:1275px;margin:auto" v-cloak id="trader">
     <div class="col-12">
       <b-card no-body class="mb-3 col-3 cardss" style=";height:450px;overflow:auto">
           <b-input v-model="searchtext" placeholder="...جستجو" style="top:0;position:absolute;height:40px; width: 100%;margin:auto;background:transparent;border-style:none;padding:10px;border-radius:0;border-bottom:solid;text-align:right" @input="search()"></b-input>
@@ -655,12 +650,14 @@ export default {
     op: {
     },
   }),
-  mounted () {
+  beforeMount(){
     this.check()
     this.checklevel()
+  },
+  mounted () {
+    this.getbal(true)
     this.getc()
     this.getb()
-    this.getbal(true)
     this.getlev()
     this.getw()
     this.tv()
@@ -862,6 +859,7 @@ export default {
       await axios
         .post('/cp_balance',{sym: this.$route.params.sym , mid: this.mid})
         .then(response => {
+          console.log(response)
           this.balances = response
           this.balance = parseFloat(response.data.available).toFixed(10)
           this.mid = response.data['account_id']
@@ -1312,9 +1310,11 @@ export default {
           })
           this.getp()
           this.getbal(false)
-          }else{
-            toast({
-            message: 'موجودی کافی نیست',
+          }
+        }).catch(data =>{
+          console.log(data)
+          toast({
+            message: `${data.data}`,
             type: 'is-danger',
             dismissible: true,
             animate: { in: 'fadeIn', out: 'fadeOut' },
@@ -1327,7 +1327,6 @@ export default {
               item.parentElement.remove()
             }, 3000);
           })
-          }
         })
   },
     borrow () {

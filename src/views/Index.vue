@@ -3,17 +3,24 @@
     <div class="ban">
       <!-- Card stats -->
       
-      <b-row style="top:170px ; position:absolute ; height:300px ; width:100%">
+      <b-row style="top:100px ; position:absolute ; height:300px ; width:100%">
         <b-col style="background:none!important">
           <div class="mainban" style="height: 150px ;margin:auto; text-align:center">
             <h2 class="mainhead" style="">خرید و فروش امن بیت‌کوین و ارزهای دیجیتال</h2>
             <h2 class="mainsubhead" style="color:black">به بزرگترین بازار ارز دیجیتال ایران بپیوندید</h2><br><br>
-            <div style="direction:rtl ; width:70%; margin:auto ; height:50px" class="input-group mb-3">
+            <div style="direction:rtl ; width:90%; margin-right:5%!important; margin-left:5%!important" class="input-group mb-3 pc">
               
-              <input style="text-align:center ; height:100% ; background: #dddddd ; color:#fff" :value="referalid" type="text" class="form-control" placeholder="ایمیل" aria-label="" aria-describedby="basic-addon1">
+              <input style="text-align:center ; background: #dddddd ; color:grey" :value="referalid" type="text" class="form-control" placeholder="ایمیل" aria-label="" aria-describedby="basic-addon1">
               <div class="input-group-prepend">
                 <button class="btn btn-dark" type="button" style="padding:">هم اکنون ثبت نام کنید</button>
               </div>
+            </div>
+            <div class="mob" style="width:100%!important">
+              <input style="text-align:center ; background: #dddddd ; color:grey ; width:100%" :value="referalid" type="text" class="form-control" placeholder="ایمیل" aria-label="" aria-describedby="basic-addon1">
+            </div><br>
+
+            <div class="mob" style="width:100%!important">
+                <button class="btn btn-dark" type="button" style="width:100%">هم اکنون ثبت نام کنید</button>
             </div>
           </div>
         </b-col>
@@ -24,49 +31,69 @@
 
 
           <b-input v-if="infoback2 && infoback && info" style="margin-top:5px;margin-bottom:5px" v-model="searchtext" placeholder="...جستجو"  @input="search()"></b-input>
+          <button style="margin-top:10px ; margin-bottom:15px" class="btn btn-dark" @click="sorted = true ;sorter('vol')">حجم بازار</button>
+          <button style="margin-top:10px ; margin-bottom:15px" class="btn btn-dark" @click="sorted = true ;sorter('buy')">بیشترین قیمت</button>
+          <button style="margin-top:10px ; margin-bottom:15px" class="btn btn-dark" @click="sorted = true ;sorter('change')">میزان رشد</button>
+
+          <br>
           <table class="table " style="direction:rtl!important;margin:0">
           <thead>
             <tr>
-              <th class="coin cent">نوع ارز</th>
-              <th class="coin cent nnmobile"> قیمت دلاری</th>
-              <th class="coin cent">قیمت خرید(ریال)</th>
-              <th class="coin cent"> قیمت فروش(ریال)</th>
-              <th v-if="false" class="coin cent nnmobile">عملیات</th>
+              <th class=" cent">نوع ارز</th>
+              <th class=" cent omobile"> قیمت </th>
+              <th class=" cent nmobile"> قیمت دلاری</th>
+              <th class=" cent nmobile">قیمت خرید(ریال)</th>
+              <th class=" cent nmobile"> قیمت فروش(ریال)</th>
+              <th class=" cent nmobile"> 24 ساعت گذشته</th>
+              <th class=" cent">عملیات</th>
             </tr>
           </thead>
-          </table>
-          <div class="table-responsive " style="margin-bottom:-20px; max-height:450px; overflow:auto " >
-        <table class="table " style="direction:rtl!important">
-          <tbody v-if="info" style="font:20px 'arial'; max-height:320px" >
-            <tr v-if="pp[2] && ('USDT').includes(searchtext.toUpperCase())">
-              <td class="coin cent"><template class="wmobile"><img src="https://raw.githubusercontent.com/ErikThiart/cryptocurrency-icons/master/64/tether.png" alt=""></template><br>{{pp[2].id}}</td>
-              <td class="coin cent nnmobile"><br>{{USDTprice}}</td>
-              <td class="coin cent" style="color:green"><router-link :to="'/buy/' + pp[2].id" class="btn btn-light" style="width: 100% ; color:green!important">خرید فوری <hr style="margin:5px ; padding:0 ; border-color:green"> {{(USDTprice * rialprice ).toFixed(2)}}</router-link > </td>
-              <td class="coin cent" style="color:red"><router-link :to="'/sell/' + pp[2].id"  class="btn btn-light" style="width: 100% ; color:red!important">فروش فوری <hr style="margin:5px ; padding:0 ; border-color:red"> {{(USDTprice * rialprice * 0.994).toFixed(2) }}</router-link > </td>
-              <th v-if="false" class="coin cent nnmobile"><router-link :to="'/sell/' + pp[2].id" class="btn btn-dark" style="margin:3px"> فروش فوری</router-link> <router-link :to="'/buy/' + pp[2].id" class="btn btn-dark" style="margin:3px">خرید فروی</router-link></th>
+          <tbody v-if="info && (!sorted)" style="font:20px 'arial'; max-height:320px" >
+            <tr v-for="(item,name,idx) in info" v-bind:key="idx+100001">
+              <td v-if="(name.replace('USDT' , '') === 'USDT')" class=" cent"><template class=""><br class="omobile"><br class="omobile"><img style="width:48px" src="https://raw.githubusercontent.com/ErikThiart/cryptocurrency-icons/master/64/tether.png" alt=""></template><br>{{'USDT'}}</td>
+              <td v-if="(name.replace('USDT' , '') === 'USDT')" class=" cent"><br><a > {{USDTprice}}<br></a><hr style="margin:0!important" class="omobile"> <a class="omobile">خرید : <br>{{(USDTprice * rialprice ).toFixed(2)}} <br> فروش :‌ <br>{{(USDTprice * rialprice * 0.994).toFixed(2) }} </a> </td>
+              <td v-if="(name.replace('USDT' , '') === 'USDT')" class=" cent nmobile" style="color:green"><br>  {{(USDTprice * rialprice ).toFixed(2)}} </td>
+              <td v-if="(name.replace('USDT' , '') === 'USDT')" class=" cent nmobile" style="color:red"><br>  {{(USDTprice * rialprice * 0.994).toFixed(2) }} </td>
+              <td v-if="(name.replace('USDT' , '') === 'USDT')" class=" cent nmobile" style="color:red"><br>  - </td>
+              <th v-if="(name.replace('USDT' , '') === 'USDT')" style="padding-top:25px" class=" cent"><router-link :to="'/sell/' + 'USDT'" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'"> فروش </router-link> <router-link :to="'/buy/' + 'USDT'" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'">خرید </router-link><router-link   :to="`/cpwallets/${'USDT'}/deposit`" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'">واریز</router-link><router-link   :to="`/cpwallets/${'USDT'}/withdraw`" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'">برداشت</router-link></th>
             </tr>
             <tr v-for="(item,name,idx) in info" v-bind:key="idx+10000">
-              <td v-if="(name.replace('USDT' , '') === 'BTC' | name.replace('USDT' , '') === 'ETH' | name.replace('USDT' , '') === 'TRX' | name.replace('USDT' , '') === 'DOGE' | name.replace('USDT' , '') === 'SHIB' | name.replace('USDT' , '') === 'BNB' | name.replace('USDT' , '') === 'BCH' | name.replace('USDT' , '') === 'XRP')" class="coin cent"><template class="wmobile"><img class="iconcur" :src="`/icons/color/${name.replace('USDT' , '').toLowerCase()}.svg`" onerror="javascript:this.src='`/icons/color/${name.replace('USDT' , '').toLowerCase()}.png';"  alt=""></template><br>{{name.replace('USDT' , '')}}</td>
-              <td v-if="(name.replace('USDT' , '') === 'BTC' | name.replace('USDT' , '') === 'ETH' | name.replace('USDT' , '') === 'TRX' | name.replace('USDT' , '') === 'DOGE' | name.replace('USDT' , '') === 'SHIB' | name.replace('USDT' , '') === 'BNB' | name.replace('USDT' , '') === 'BCH' | name.replace('USDT' , '') === 'XRP')" class="coin cent nnmobile"  ><br> {{item.buy}}</td>
-              <td v-if="(name.replace('USDT' , '') === 'BTC' | name.replace('USDT' , '') === 'ETH' | name.replace('USDT' , '') === 'TRX' | name.replace('USDT' , '') === 'DOGE' | name.replace('USDT' , '') === 'SHIB' | name.replace('USDT' , '') === 'BNB' | name.replace('USDT' , '') === 'BCH' | name.replace('USDT' , '') === 'XRP')" class="coin cent" style="color:green"><router-link :to="'/buy/' + name.replace('USDT' , '')"  class="btn btn-light" style="width: 100% ; color:green!important">خرید فوری <hr style="margin:5px ; padding:0 ; border-color:green"> {{(item.buy * 1.007 * rialprice).toFixed(2)}}</router-link > </td>
-              <td v-if="(name.replace('USDT' , '') === 'BTC' | name.replace('USDT' , '') === 'ETH' | name.replace('USDT' , '') === 'TRX' | name.replace('USDT' , '') === 'DOGE' | name.replace('USDT' , '') === 'SHIB' | name.replace('USDT' , '') === 'BNB' | name.replace('USDT' , '') === 'BCH' | name.replace('USDT' , '') === 'XRP')" class="coin cent" style="color:red"><router-link :to="'/sell/' + name.replace('USDT' , '')"  class="btn btn-light" style="width: 100% ; color:red!important">فروش فوری <hr style="margin:5px ; padding:0 ; border-color:red"> {{(item.buy * 1.001  * rialprice).toFixed(2)}}</router-link > </td>
-              <th v-if="false" class="coin cent nnmobile"><router-link :to="'/sell/' + name.replace('USDT' , '')" class="btn btn-dark" style="margin:3px"> فروش فوری</router-link> <router-link :to="'/buy/' + name.replace('USDT' , '')" class="btn btn-dark" style="margin:3px">خرید فروی</router-link></th>
+              <td v-if="(name.replace('USDT' , '') === 'BTC' | name.replace('USDT' , '') === 'ETH' | name.replace('USDT' , '') === 'TRX' | name.replace('USDT' , '') === 'DOGE' | name.replace('USDT' , '') === 'SHIB' | name.replace('USDT' , '') === 'BNB' | name.replace('USDT' , '') === 'BCH' | name.replace('USDT' , '') === 'XRP')" class=" cent"><template class=""><br class="omobile"><br class="omobile"><img style="width:48px" class="" :src="`/icons/color/${name.replace('USDT' , '').toLowerCase()}.svg`" :onerror="`javascript:this.src='/icons/color/${name.replace('USDT' , '').toLowerCase()}.png';`"  alt=""></template><br>{{name.replace('USDT' , '')}}nn</td>
+              <td v-if="(name.replace('USDT' , '') === 'BTC' | name.replace('USDT' , '') === 'ETH' | name.replace('USDT' , '') === 'TRX' | name.replace('USDT' , '') === 'DOGE' | name.replace('USDT' , '') === 'SHIB' | name.replace('USDT' , '') === 'BNB' | name.replace('USDT' , '') === 'BCH' | name.replace('USDT' , '') === 'XRP')" class=" cent"  ><br><a > {{item.buy}}<br></a><hr style="margin:0!important" class="omobile"> <a class="omobile">خرید : <br>{{(item.buy * 1.007 * rialprice).toFixed(0)}} <br> فروش :‌ <br>{{(item.buy * 1.001  * rialprice).toFixed(0)}}</a> </td>
+              <td v-if="(name.replace('USDT' , '') === 'BTC' | name.replace('USDT' , '') === 'ETH' | name.replace('USDT' , '') === 'TRX' | name.replace('USDT' , '') === 'DOGE' | name.replace('USDT' , '') === 'SHIB' | name.replace('USDT' , '') === 'BNB' | name.replace('USDT' , '') === 'BCH' | name.replace('USDT' , '') === 'XRP')" class=" cent nmobile" style="color:green"><br> {{(item.buy * 1.007 * rialprice).toFixed(0)}}</td>
+              <td v-if="(name.replace('USDT' , '') === 'BTC' | name.replace('USDT' , '') === 'ETH' | name.replace('USDT' , '') === 'TRX' | name.replace('USDT' , '') === 'DOGE' | name.replace('USDT' , '') === 'SHIB' | name.replace('USDT' , '') === 'BNB' | name.replace('USDT' , '') === 'BCH' | name.replace('USDT' , '') === 'XRP')" class=" cent nmobile" style="color:red"><br> {{(item.buy * 1.001  * rialprice).toFixed(0)}}</td>
+              <td v-if="(name.replace('USDT' , '') === 'BTC' | name.replace('USDT' , '') === 'ETH' | name.replace('USDT' , '') === 'TRX' | name.replace('USDT' , '') === 'DOGE' | name.replace('USDT' , '') === 'SHIB' | name.replace('USDT' , '') === 'BNB' | name.replace('USDT' , '') === 'BCH' | name.replace('USDT' , '') === 'XRP')" class=" cent nmobile" style="color:red"><br><a v-if="(parseFloat(item.change)).toFixed(1) > 0" style="color:green"> {{(parseFloat(item.change)).toFixed(1).toString().replace('-', '')}} </a><a v-if="(parseFloat(item.change)).toFixed(1) < 0" style="color:red"> {{(parseFloat(item.change)).toFixed(1).toString().replace('-', '')}} </a> <a v-if="!(parseFloat(item.change))">-</a> </td>
+              <th style="padding-top:25px" v-if="(name.replace('USDT' , '') === 'BTC' | name.replace('USDT' , '') === 'ETH' | name.replace('USDT' , '') === 'TRX' | name.replace('USDT' , '') === 'DOGE' | name.replace('USDT' , '') === 'SHIB' | name.replace('USDT' , '') === 'BNB' | name.replace('USDT' , '') === 'BCH' | name.replace('USDT' , '') === 'XRP')" class=" cent"><router-link :to="'/sell/' + name.replace('USDT' , '')" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'"> فروش </router-link> <router-link :to="'/buy/' + name.replace('USDT' , '')" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'">خرید </router-link><router-link   :to="`/cpwallets/${name.replace('USDT' , '')}/deposit`" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'">واریز</router-link><router-link   :to="`/cpwallets/${name.replace('USDT' , '')}/withdraw`" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'">برداشت</router-link></th>
             </tr>
             <tr v-for="(item,name,idx) in info" v-bind:key="idx + 'd'">   
-              <td v-if="!(name.replace('USDT' , '') === 'BTC' | name.replace('USDT' , '') === 'ETH' | name.replace('USDT' , '') === 'TRX' | name.replace('USDT' , '') === 'DOGE' | name.replace('USDT' , '') === 'SHIB' | name.replace('USDT' , '') === 'BNB' | name.replace('USDT' , '') === 'BCH' | name.replace('USDT' , '') === 'XRP')"  class="coin cent"><template><img class="iconcur" :src="`/icons/color/${name.replace('USDT' , '').toLowerCase()}.svg`" onerror="javascript:this.src='`/icons/color/${name.replace('USDT' , '').toLowerCase()}.png';"  alt=""></template><br>{{name.replace('USDT' , '')}}</td>
-              <td v-if="!(name.replace('USDT' , '') === 'BTC' | name.replace('USDT' , '') === 'ETH' | name.replace('USDT' , '') === 'TRX' | name.replace('USDT' , '') === 'DOGE' | name.replace('USDT' , '') === 'SHIB' | name.replace('USDT' , '') === 'BNB' | name.replace('USDT' , '') === 'BCH' | name.replace('USDT' , '') === 'XRP')"  class="coin cent nnmobile"><br> {{item.buy}}</td>
-              <td v-if="!(name.replace('USDT' , '') === 'BTC' | name.replace('USDT' , '') === 'ETH' | name.replace('USDT' , '') === 'TRX' | name.replace('USDT' , '') === 'DOGE' | name.replace('USDT' , '') === 'SHIB' | name.replace('USDT' , '') === 'BNB' | name.replace('USDT' , '') === 'BCH' | name.replace('USDT' , '') === 'XRP')"  class="coin cent" style="color:green"><router-link :to="'/buy/' + name.replace('USDT' , '')"  class="btn btn-light" style="width: 100% ; color:green!important">خرید فوری <hr style="margin:5px ; padding:0 ; border-color:green"> {{(item.buy * 1.007 * rialprice).toFixed(2)}}</router-link > </td>
-              <td v-if="!(name.replace('USDT' , '') === 'BTC' | name.replace('USDT' , '') === 'ETH' | name.replace('USDT' , '') === 'TRX' | name.replace('USDT' , '') === 'DOGE' | name.replace('USDT' , '') === 'SHIB' | name.replace('USDT' , '') === 'BNB' | name.replace('USDT' , '') === 'BCH' | name.replace('USDT' , '') === 'XRP')"  class="coin cent" style="color:red"><router-link  :to="'/sell/' + name.replace('USDT' , '')" class="btn btn-light" style="width: 100% ; color:red!important">فروش فوری <hr style="margin:5px ; padding:0 ; border-color:red"> {{(item.buy * 1.001  * rialprice).toFixed(2)}}</router-link > </td>
-              <th v-if="false" class="coin cent nnmobile"><router-link :to="'/sell/' + name.replace('USDT' , '')" class="btn btn-dark" style="margin:3px"> فروش فوری</router-link> <router-link :to="'/buy/' + name.replace('USDT' , '')" class="btn btn-dark" style="margin:3px">خرید فروی</router-link></th>
+              <td v-if="name.replace('USDT' , '') !== 'USDT' && !(name.replace('USDT' , '') === 'BTC' | name.replace('USDT' , '') === 'ETH' | name.replace('USDT' , '') === 'TRX' | name.replace('USDT' , '') === 'DOGE' | name.replace('USDT' , '') === 'SHIB' | name.replace('USDT' , '') === 'BNB' | name.replace('USDT' , '') === 'BCH' | name.replace('USDT' , '') === 'XRP') | name.replace('USDT' , '') "  class=" cent"><template><br class="omobile"><br class="omobile"><img style="width:48px" class="" :src="`/icons/color/${name.replace('USDT' , '').toLowerCase()}.svg`" :onerror="`javascript:this.src='/icons/color/${name.replace('USDT' , '').toLowerCase()}.png';`"  alt=""></template><br>{{name.replace('USDT' , '')}}mm</td>
+              <td v-if="name.replace('USDT' , '') !== 'USDT' && !(name.replace('USDT' , '') === 'BTC' | name.replace('USDT' , '') === 'ETH' | name.replace('USDT' , '') === 'TRX' | name.replace('USDT' , '') === 'DOGE' | name.replace('USDT' , '') === 'SHIB' | name.replace('USDT' , '') === 'BNB' | name.replace('USDT' , '') === 'BCH' | name.replace('USDT' , '') === 'XRP') | name.replace('USDT' , '') "  class=" cent"><br  class="nmobile"><br> <a >{{item.buy}}<br></a><hr style="margin:0!important" class="omobile"> <a class="omobile">خرید :<br> {{(item.buy * 1.007 * rialprice).toFixed(0)}} <br> فروش :‌ <br>{{(item.buy * 1.001  * rialprice).toFixed(0)}}</a> </td>
+              <td v-if="name.replace('USDT' , '') !== 'USDT' && !(name.replace('USDT' , '') === 'BTC' | name.replace('USDT' , '') === 'ETH' | name.replace('USDT' , '') === 'TRX' | name.replace('USDT' , '') === 'DOGE' | name.replace('USDT' , '') === 'SHIB' | name.replace('USDT' , '') === 'BNB' | name.replace('USDT' , '') === 'BCH' | name.replace('USDT' , '') === 'XRP') | name.replace('USDT' , '') "  class=" cent nmobile" style="color:green"><br>{{(item.buy * 1.007 * rialprice).toFixed(0)}} </td>
+              <td v-if="name.replace('USDT' , '') !== 'USDT' && !(name.replace('USDT' , '') === 'BTC' | name.replace('USDT' , '') === 'ETH' | name.replace('USDT' , '') === 'TRX' | name.replace('USDT' , '') === 'DOGE' | name.replace('USDT' , '') === 'SHIB' | name.replace('USDT' , '') === 'BNB' | name.replace('USDT' , '') === 'BCH' | name.replace('USDT' , '') === 'XRP') | name.replace('USDT' , '') "  class=" cent nmobile" style="color:red"><br> {{(item.buy * 1.001  * rialprice).toFixed(0)}} </td>
+              <td v-if="name.replace('USDT' , '') !== 'USDT' && !(name.replace('USDT' , '') === 'BTC' | name.replace('USDT' , '') === 'ETH' | name.replace('USDT' , '') === 'TRX' | name.replace('USDT' , '') === 'DOGE' | name.replace('USDT' , '') === 'SHIB' | name.replace('USDT' , '') === 'BNB' | name.replace('USDT' , '') === 'BCH' | name.replace('USDT' , '') === 'XRP') | name.replace('USDT' , '') "  class=" cent nmobile" style="color:red"><br><a v-if="(parseFloat(item.change)).toFixed(1) > 0" style="color:green"> {{(parseFloat(item.change)).toFixed(1).toString().replace('-', '')}} </a><a v-if="(parseFloat(item.change)).toFixed(1) < 0" style="color:red" > {{(parseFloat(item.change)).toFixed(1).toString().replace('-', '')}} </a><a v-if="!(parseFloat(item.change))">-</a>  </td>
+              <th style="padding-top:25px" v-if="name.replace('USDT' , '') !== 'USDT' && !(name.replace('USDT' , '') === 'BTC' | name.replace('USDT' , '') === 'ETH' | name.replace('USDT' , '') === 'TRX' | name.replace('USDT' , '') === 'DOGE' | name.replace('USDT' , '') === 'SHIB' | name.replace('USDT' , '') === 'BNB' | name.replace('USDT' , '') === 'BCH' | name.replace('USDT' , '') === 'XRP') | name.replace('USDT' , '') === 'USDT'" class=" cent"><router-link :to="'/sell/' + name.replace('USDT' , '')" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'"> فروش </router-link> <router-link :to="'/buy/' + name.replace('USDT' , '')" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'">خرید </router-link><router-link   :to="`/cpwallets/${name.replace('USDT' , '')}/deposit`" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'">واریز</router-link><router-link   :to="`/cpwallets/${name.replace('USDT' , '')}/withdraw`" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'">برداشت</router-link></th>
             </tr>
           </tbody>
-          <tfoot>
-            <tr>
-                <th colspan="5" class="cent d-md-none"><router-link to="/dashboard" class="btn btn-dark">خرید | فروش</router-link></th>
+          <tbody v-if="info3 && (sorted)" style="font:20px 'arial'; max-height:320px" >
+
+            <tr v-for="(item,name,idx) in sortedinfo" v-bind:key="idx+10000">
+              <td v-if="name.replace('USDT' , '') !== 'USDT'" class=" cent"><template class=""><br class="omobile"><br class="omobile"><img style="width:48px" class="" :src="`/icons/color/${name.replace('USDT' , '').toLowerCase()}.svg`" :onerror="`javascript:this.src='/icons/color/${name.replace('USDT' , '').toLowerCase()}.png';`"  alt=""></template><br>{{name.replace('USDT' , '')}}</td>
+              <td v-if="name.replace('USDT' , '') !== 'USDT'" class=" cent"  ><br><a > {{item.buy}}<br></a><hr style="margin:0!important" class="omobile"> <a class="omobile">خرید : <br>{{(item.buy * 1.007 * rialprice).toFixed(0)}} <br> فروش :‌ <br>{{(item.buy * 1.001  * rialprice).toFixed(0)}}</a> </td>
+              <td v-if="name.replace('USDT' , '') !== 'USDT'" class=" cent nmobile" style="color:green"><br> {{(item.buy * 1.007 * rialprice).toFixed(0)}}</td>
+              <td v-if="name.replace('USDT' , '') !== 'USDT'" class=" cent nmobile" style="color:red"><br> {{(item.buy * 1.001  * rialprice).toFixed(0)}}</td>
+              <td v-if="name.replace('USDT' , '') !== 'USDT'" class=" cent nmobile" style="color:red"><br><a v-if="(parseFloat(item.change)).toFixed(1) > 0" style="color:green"> {{(parseFloat(item.change)).toFixed(1).toString().replace('-', '')}} </a><a v-if="(parseFloat(item.change)).toFixed(1) < 0" style="color:red"> {{(parseFloat(item.change)).toFixed(1).toString().replace('-', '')}} </a> <a v-if="!(parseFloat(item.change))">-</a> </td>
+              <th v-if="name.replace('USDT' , '') !== 'USDT'" style="padding-top:25px" class=" cent"><router-link :to="'/sell/' + name.replace('USDT' , '')" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'"> فروش </router-link> <router-link :to="'/buy/' + name.replace('USDT' , '')" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'">خرید </router-link><router-link   :to="`/cpwallets/${name.replace('USDT' , '')}/deposit`" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'">واریز</router-link><router-link   :to="`/cpwallets/${name.replace('USDT' , '')}/withdraw`" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'">برداشت</router-link></th>
+
+              <td v-if="name.replace('USDT' , '') === 'USDT'" class=" cent"><template class=""><br class="omobile"><br class="omobile"><img style="width:48px" src="https://raw.githubusercontent.com/ErikThiart/cryptocurrency-icons/master/64/tether.png" alt=""></template><br>{{'USDT'}}</td>
+              <td v-if="name.replace('USDT' , '') === 'USDT'" class=" cent"><br><a > {{USDTprice}}<br></a><hr style="margin:0!important" class="omobile"> <a class="omobile">خرید : <br>{{(USDTprice * rialprice ).toFixed(2)}} <br> فروش :‌ <br>{{(USDTprice * rialprice * 0.994).toFixed(2) }} </a> </td>
+              <td v-if="name.replace('USDT' , '') === 'USDT'" class=" cent nmobile" style="color:green"><br> {{(USDTprice * rialprice ).toFixed(2)}} </td>
+              <td v-if="name.replace('USDT' , '') === 'USDT'" class=" cent nmobile" style="color:red"><br> {{(USDTprice * rialprice * 0.994).toFixed(2) }} </td>
+              <td v-if="name.replace('USDT' , '') === 'USDT'" class=" cent nmobile" style="color:red"><br> - </td>
+              <th v-if="name.replace('USDT' , '') === 'USDT'" style="padding-top:25px" class=" cent"><router-link :to="'/sell/' + 'USDT'" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'"> فروش </router-link> <router-link :to="'/buy/' + 'USDT'" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'">خرید </router-link><router-link   :to="`/cpwallets/${'USDT'}/deposit`" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'">واریز</router-link><router-link   :to="`/cpwallets/${'USDT'}/withdraw`" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'">برداشت</router-link></th>
             </tr>
-          </tfoot>
+          </tbody>
         </table>
-        </div><br><br><br>
+        <br><br><br>
         
 
         <div class="col-12 d-none d-md-block" style="min-height:490px; padding:50px ; text-align:right">
@@ -221,8 +248,19 @@
       SocialTrafficTable,
       LayoutNavbar
     },
-    data() {
-      return {
+    computed:{
+      sortedinfo: function() {
+        const sortable = Object.fromEntries(
+        Object.entries(this.info3).sort((a,b) =>{
+          return parseFloat(b[1][this.currentSort]) - parseFloat(a[1][this.currentSort])
+        })
+      );
+      console.log(Object.entries(this.info3))
+      console.log(sortable)
+      return sortable
+      }
+    },
+    data: () => ({
         posts: [],
         tops: [],
         lists: get().SNPair,
@@ -230,9 +268,16 @@
         pp:[],
         searchtxt: '',
         searchtext: '',
+        info: {},
+        info2:{},
+        info3: {},
+        sorted : false,
         infoback: {},
         infoback2: {},
+        infoback3: {},
         USDTprice: 0,
+        currentSort:'vol',
+        currentSortDir:'asc',
         rialprice: 0,
         sym : 'BTCUSDT',
         dashboardinfo : [],
@@ -240,9 +285,14 @@
         his: [],
         slides: [],
         slides2: []
-      }
-    },
+    }),
     methods: {
+      sorter(s) {
+        if(s === this.currentSort) {
+          this.currentSortDir = this.currentSortDir==='asc'?'desc':'asc';
+        }
+        this.currentSort = s;
+      },
       async getusdtprice () {
       await axios
         .post('/cp_ticker' , {sym: 'USDT'})
@@ -276,6 +326,18 @@
       await axios
         .get('/oltradeinfo3')
         .then(response => {
+          response.data['USDTUSDT'] = 
+          {
+            "vol": 124160000000,
+            "low": 3.2100,
+            "open": 3.9851,
+            "high": 4.1786,
+            "last": 340.90767210002036,
+            "buy": 3.4059,
+            "buy_amount": 52.21796592,
+            "sell": 3.4229,
+            "sell_amount": 18.67342051
+          }
           this.infoback = response.data
           if(!this.searchtext){
             this.info = response.data
@@ -291,9 +353,23 @@
       await axios
         .get('/oltradeinfo3')
         .then(response => {
-          this.info = response.data
-          this.infoback = response.data
-          this.infoback2 = response.data
+          response.data['USDTUSDT'] = 
+          {
+            "vol": 124160000000,
+            "low": 3.2100,
+            "open": 3.9851,
+            "high": 4.1786,
+            "last": 340.90767210002036,
+            "buy": 3.4059,
+            "buy_amount": 52.21796592,
+            "sell": 3.4229,
+            "sell_amount": 18.67342051
+          }
+          Object.assign(this.info, response.data)
+          Object.assign(this.info3, response.data)
+          Object.assign(this.infoback, response.data)
+          Object.assign(this.infoback2, response.data)
+          Object.assign(this.infoback3, response.data)
           this.getc()
         })
     },
@@ -358,7 +434,6 @@
     },
     search () {
       this.info = {}
-      var i = 0
       for (const item of Object.keys(this.infoback2)){
         var key = String(item)
         if(key.replace('USDT' , '').includes(this.searchtext.toUpperCase())){
@@ -367,12 +442,22 @@
           }
         }
       }
+
+      this.info3 = {}
+      for (const item of Object.keys(this.infoback3)){
+        var key = String(item)
+        if(key.replace('USDT' , '').includes(this.searchtext.toUpperCase())){
+          if(this.infoback3[item]){
+            this.info3[item] = this.infoback3[item]
+          }
+        }
+      }
     },
     },
     beforeMount(){
+      this.getusdtprice()
       this.getc2()
       this.gettop()
-      this.getusdtprice()
       this.getbottom()
       this.getposts()
       this.getrialprice()
@@ -410,23 +495,17 @@
 .mainban{
   width:65%;
   background: rgba(255, 255, 255, 0.5);
-  height: 450px!important;
+  height: 550px!important;
   border-radius: 20px;
   border-style: solid;
   border-color: rgba(255, 255, 255, 0.8);
   padding: 3%;
 }
-.coin{
-  width:25%
+.omobile{
+  display : none;
+  font-size:16px
 }
-.iconcur{
-  width: 12%; 
-  margin:5%
-}
-@media only screen and (max-width: 1024px) {
-.nnmobile{
-  display: none;
-}
+@media only screen and (max-width: 1023px) {
 .mainhead{
   font:25px 'yekan';
   color:black;
@@ -453,20 +532,19 @@
   height:500px; 
   width:100%;
 }
-.coin{
-  width:33%
-}
 td , th {
   padding: 0 !important;
-}
-.iconcur{
-  width: 50%; 
-  margin:5%
 }
 .btn{
   width: 90% !important;
   height:90%;
   margin:5%
+}
+.nmobile{
+  display : none
+}
+.omobile{
+  display : block
 }
 }
 </style>

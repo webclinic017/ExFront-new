@@ -23,7 +23,7 @@
               <div class="col-2 cent" style="font:12px 'arial'">{{section.ramount}}</div>
               <div class="col-3 cent" style="font:12px 'arial'">{{section.camount}}</div>
               <div class="col-2 cent">{{section.get_age}}</div>
-              <div class="col-2 cent"><form @submit.prevent="accept(section.id)"><input min="100000" required class="form-control" :id="section.id" style="width:100%; float:left" type="text" placeholder=" قیمت تمام شده"><button type="submit" class="btn btn-success" style="width:100%; float:left">تایید</button></form></div>
+              <div class="col-2 cent"><form @submit.prevent="accept(section.id)"><button type="submit" class="btn btn-success" style="width:100%; float:left">تایید</button></form></div>
             </div>
             <div class="row no-gutters align-items-center" style="margin:0;margin-top:15px">
               <div class="col-2 cent">هش:</div>

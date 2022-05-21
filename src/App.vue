@@ -8,6 +8,8 @@
 
 <script>
 import _themeSettings from './vendor/libs/theme-settings/theme-settings'
+import themeSettings from '@/vendor/libs/theme-settings/theme-settings.js'
+
 import axios from 'axios'
 export default {
   name: 'app',
@@ -16,6 +18,7 @@ export default {
     titleTemplate: '%s - Appwork'
   },
   beforeCreate(){
+    themeSettings.setTheme('air')
     if(localStorage.getItem('themeSettingsRtl') === 'true'){
     }
     else{
@@ -54,6 +57,9 @@ export default {
 		 url('https://cdn.fontcdn.ir/Font/Persian/Yekan/Yekan-Bold.woff') format('woff'),
 		 url('https://cdn.fontcdn.ir/Font/Persian/Yekan/Yekan-Bold.ttf') format('truetype');
     font-weight: bold;
+}
+.theme-settings-open-btn{
+  display: none!important
 }
 body{
   font-family: 'Yekan'!important;
@@ -126,4 +132,5 @@ input{
   background-color: #888!important;
   background-image: -webkit-gradient(linear,left top,left bottom,from(#888),to(#333))!important;
 }
+
 </style>

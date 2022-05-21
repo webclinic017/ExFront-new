@@ -2,11 +2,11 @@
   <sidenav :orientation="orientation" :class="curClasses">
 
     <!-- Brand demo (see src/demo.css) -->
-    <div class="app-brand demo" v-if="orientation !== 'horizontal'">
-      <router-link  to="/" class="app-brand-text demo sidenav-text font-weight-normal ml-2">
-      <img v-if="!ifname" src="/img/logo.png" style="width:48px ; height: 48px ; margin-right:5px" alt="">
+    <div class="app-brand demo" style="padding:18px" v-if="orientation !== 'horizontal'">
+      <router-link   to="/" class="app-brand-text demo sidenav-text font-weight-normal ml-2">
+      <img v-if="!ifname" src="/img/logo.png" style="width:32px ; height: 32px ; margin-right:-8px" alt="">
         <img v-if="ifname" src="/img/logo.png" style="width:32px ; height: 32px" alt="">
-      <a v-if="ifname">AMIZAX</a> </router-link>
+      <a v-if="ifname"><h style="color:white;font-size:22px; font-weight:bold ; margin-right: 10px">آمیزاکس</h></a> </router-link>
       <a href="javascript:void(0)" class="layout-sidenav-toggle sidenav-link text-large ml-auto" @click="toggleSidenav()">
         <i class="ion ion-md-menu align-middle"></i>
       </a>
@@ -44,7 +44,7 @@
       <sidenav-divider class="mb-1"/>
             <sidenav-router-link icon="ion ion-md-swap" to="/exchange" :exact="true">اکسچینج</sidenav-router-link>
       <sidenav-divider class="mb-1"/>
-      <sidenav-header class="small font-weight-semibold">خرید از AMIZAX</sidenav-header>
+      <sidenav-header class="small font-weight-semibold">خرید</sidenav-header>
       <sidenav-router-link icon="ion ion-md-cart" to="/buy-out" :exact="true"> خرید خارجی</sidenav-router-link>
       <sidenav-router-link icon="ion ion-md-cart" to="/buy" :exact="true"> خرید داخلی </sidenav-router-link>
       

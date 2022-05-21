@@ -2,10 +2,11 @@
   <sidenav :orientation="orientation" :class="curClasses">
 
     <!-- Brand demo (see src/demo.css) -->
-    <div class="app-brand demo" v-if="orientation !== 'horizontal'">
-      <img v-if="!ifname" src="/img/logo.png" style="width:48px ; height: 48px ; margin-right:10px" alt="">
+    <div class="app-brand demo" style="padding:18px" v-if="orientation !== 'horizontal'">
+      <router-link   to="/" class="app-brand-text demo sidenav-text font-weight-normal ml-2">
+      <img v-if="!ifname" src="/img/logo.png" style="width:32px ; height: 32px ; margin-right:-8px" alt="">
         <img v-if="ifname" src="/img/logo.png" style="width:32px ; height: 32px" alt="">
-      <router-link v-if="ifname" to="/" class="app-brand-text demo sidenav-text font-weight-normal ml-2">AMIZAX</router-link>
+      <a v-if="ifname"><h style="color:white;font-size:22px; font-weight:bold ; margin-right: 10px">آمیزاکس</h></a> </router-link>
       <a href="javascript:void(0)" class="layout-sidenav-toggle sidenav-link text-large ml-auto" @click="toggleSidenav()">
         <i class="ion ion-md-menu align-middle"></i>
       </a>
@@ -30,55 +31,37 @@
 
 
 
-      <sidenav-router-link icon="ion ion-md-quote" to="/adminpanel/profit" :exact="true">تاریخچه درآمد ها</sidenav-router-link>
       <sidenav-router-link icon="ion ion-md-quote" to="/adminpanel/transactions" :exact="true"> تاریخچه برداشت و واریز</sidenav-router-link>
       <sidenav-router-link icon="ion ion-md-quote" to="/adminpanel/withdraw" :exact="true"> برداشت ریالی</sidenav-router-link>
-      <sidenav-router-link icon="ion ion-md-quote" to="/adminpanel/cptransactions" :exact="true"> تاریخچه حساب ترید</sidenav-router-link>
 
 
       <sidenav-menu icon="ion ion-md-quote"  :exact="true">
-        <template slot="link-text"> برداشت از کوینکس</template>
+        <template slot="link-text"> برداشت ارزی</template>
         <sidenav-router-link  to="/adminpanel/cwithdraw" :exact="true"> درخواست های برداشت</sidenav-router-link>
         <sidenav-router-link  to="/adminpanel/rcwithdraw" :exact="true"> درخواست های رد شده</sidenav-router-link>
         <sidenav-router-link  to="/adminpanel/ccwithdraw" :exact="true"> درخواست های انجام شده</sidenav-router-link>
       </sidenav-menu>
 
-
       <sidenav-menu icon="ion ion-md-quote"  :exact="true">
-        <template slot="link-text"> خرید از داخلی Amizax</template>
-        <sidenav-router-link  to="/adminpanel/buy" :exact="true"> درخواست ها </sidenav-router-link>
-        <sidenav-router-link  to="/adminpanel/buydone" :exact="true">   رد شده</sidenav-router-link>
-        <sidenav-router-link  to="/adminpanel/buyreject" :exact="true">   انجام شده</sidenav-router-link>
-      </sidenav-menu>
-
-
-      <sidenav-menu icon="ion ion-md-quote"  :exact="true">
-        <template slot="link-text"> فروش از داخلی Amizax</template>
-        <sidenav-router-link  to="/adminpanel/sellset" :exact="true"> تایید قیمت</sidenav-router-link>
-        <sidenav-router-link  to="/adminpanel/selldone" :exact="true"> انجام شده</sidenav-router-link>
-      </sidenav-menu>
-
-
-      <sidenav-menu icon="ion ion-md-quote"  :exact="true">
-        <template slot="link-text"> اکسچینج</template>
-        <sidenav-router-link  to="/adminpanel/exchange" :exact="true"> درخواست ها </sidenav-router-link>
-        <sidenav-router-link  to="/adminpanel/exchangedone" :exact="true">   رد شده</sidenav-router-link>
-        <sidenav-router-link  to="/adminpanel/exchangereject" :exact="true">   انجام شده</sidenav-router-link>
-      </sidenav-menu>
-
-
-      <sidenav-menu icon="ion ion-md-quote"  :exact="true">
-        <template slot="link-text"> درخواست های واریز</template>
+        <template slot="link-text">واریز ارزی</template>
         <sidenav-router-link  to="/adminpanel/deposit" :exact="true"> درخواست ها </sidenav-router-link>
         <sidenav-router-link  to="/adminpanel/depositdone" :exact="true">   رد شده</sidenav-router-link>
         <sidenav-router-link  to="/adminpanel/depositreject" :exact="true">   انجام شده</sidenav-router-link>
       </sidenav-menu>
 
+
+        
+
+      <sidenav-divider class="mb-1"/>
+      <sidenav-header class="small font-weight-semibold">معاملات داخلی</sidenav-header>
+      <sidenav-router-link icon="ion ion-md-quote"  to="/adminpanel/buydone" :exact="true"> تاریخچه خرید داخلی</sidenav-router-link>
+      <sidenav-router-link icon="ion ion-md-quote"  to="/adminpanel/selldone" :exact="true">تاریخچه فروش داخلی</sidenav-router-link>
+      <sidenav-router-link icon="ion ion-md-quote"  to="/adminpanel/exchangedone" :exact="true">تاریخچه اکسچینج</sidenav-router-link>
       
       <sidenav-divider class="mb-1"/>
-      <sidenav-header class="small font-weight-semibold">خرید و فروش از کیف های خارج از سایت</sidenav-header>
-      <sidenav-router-link icon="ion ion-md-quote" to="/adminpanel/buy-out" :exact="true"> خرید از AMIZAX</sidenav-router-link>
-      <sidenav-router-link icon="ion ion-md-quote" to="/adminpanel/sell-out" :exact="true"> فروش به AMIZAX</sidenav-router-link>
+      <sidenav-header class="small font-weight-semibold">معاملات خارجی</sidenav-header>
+      <sidenav-router-link icon="ion ion-md-quote" to="/adminpanel/buy-out" :exact="true"> خرید خارجی</sidenav-router-link>
+      <sidenav-router-link icon="ion ion-md-quote" to="/adminpanel/sell-out" :exact="true"> فروش خارجی</sidenav-router-link>
       <sidenav-router-link icon="ion ion-md-quote" to="/adminpanel/open-orders-out" :exact="true">سفارشات باز</sidenav-router-link>
       <sidenav-router-link icon="ion ion-md-quote" to="/adminpanel/history-out" :exact="true">تاریخچه سفارشات</sidenav-router-link>
 
