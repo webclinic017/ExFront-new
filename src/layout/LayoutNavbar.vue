@@ -4,7 +4,7 @@
     <!-- Brand demo (see demo.css) -->
     <b-navbar-brand to="/" class="app-brand demo d-lg-none py-0 mr-4">
         <img  src="/img/logo.png" style="width:32px ; height: 32px" alt="">
-      <span class="app-brand-text demo font-weight-normal ml-2"><h style="color:rgb(206, 206, 206);font-size:22px; font-weight:bold ; margin-right: 10px">آمیزاکس</h></span>
+      <span class="app-brand-text demo font-weight-normal ml-2"><a style="color:rgb(206, 206, 206);font-size:22px; font-weight:bold ; margin-right: 10px">آمیزاکس</a></span>
     </b-navbar-brand>
 
     <!-- Sidenav toggle (see demo.css) -->
@@ -120,6 +120,8 @@ export default {
     return {
       notification: [],
       tickets: [],
+      tunseen: [],
+      nunseen: []
     }
   },
   mounted(){

@@ -10,13 +10,13 @@
             <h2 class="mainsubhead" style="color:black">به بزرگترین بازار ارز دیجیتال ایران بپیوندید</h2><br><br>
             <div style="direction:rtl ; width:90%; margin-right:5%!important; margin-left:5%!important" class="input-group mb-3 pc">
               
-              <input style="text-align:center ; background: #dddddd ; color:grey" :value="referalid" type="text" class="form-control" placeholder="ایمیل" aria-label="" aria-describedby="basic-addon1">
+              <input style="text-align:center ; background: #dddddd ; color:grey"  type="text" class="form-control" placeholder="ایمیل" aria-label="" aria-describedby="basic-addon1">
               <div class="input-group-prepend">
                 <button class="btn btn-dark" type="button" style="padding:">هم اکنون ثبت نام کنید</button>
               </div>
             </div>
             <div class="mob" style="width:100%!important">
-              <input style="text-align:center ; background: #dddddd ; color:grey ; width:100%" :value="referalid" type="text" class="form-control" placeholder="ایمیل" aria-label="" aria-describedby="basic-addon1">
+              <input style="text-align:center ; background: #dddddd ; color:grey ; width:100%"  type="text" class="form-control" placeholder="ایمیل" aria-label="" aria-describedby="basic-addon1">
             </div><br>
 
             <div class="mob" style="width:100%!important">
@@ -58,7 +58,7 @@
               <th v-if="(name.replace('USDT' , '') === 'USDT')" style="padding-top:25px" class=" cent"><router-link :to="'/sell/' + 'USDT'" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'"> فروش </router-link> <router-link :to="'/buy/' + 'USDT'" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'">خرید </router-link><router-link   :to="`/cpwallets/${'USDT'}/deposit`" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'">واریز</router-link><router-link   :to="`/cpwallets/${'USDT'}/withdraw`" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'">برداشت</router-link></th>
             </tr>
             <tr v-for="(item,name,idx) in info" v-bind:key="idx+10000">
-              <td v-if="(name.replace('USDT' , '') === 'BTC' | name.replace('USDT' , '') === 'ETH' | name.replace('USDT' , '') === 'TRX' | name.replace('USDT' , '') === 'DOGE' | name.replace('USDT' , '') === 'SHIB' | name.replace('USDT' , '') === 'BNB' | name.replace('USDT' , '') === 'BCH' | name.replace('USDT' , '') === 'XRP')" class=" cent"><template class=""><br class="omobile"><br class="omobile"><img style="width:48px" class="" :src="`/icons/color/${name.replace('USDT' , '').toLowerCase()}.svg`" :onerror="`javascript:this.src='/icons/color/${name.replace('USDT' , '').toLowerCase()}.png';`"  alt=""></template><br>{{name.replace('USDT' , '')}}nn</td>
+              <td v-if="(name.replace('USDT' , '') === 'BTC' | name.replace('USDT' , '') === 'ETH' | name.replace('USDT' , '') === 'TRX' | name.replace('USDT' , '') === 'DOGE' | name.replace('USDT' , '') === 'SHIB' | name.replace('USDT' , '') === 'BNB' | name.replace('USDT' , '') === 'BCH' | name.replace('USDT' , '') === 'XRP')" class=" cent"><template class=""><br class="omobile"><br class="omobile"><img style="width:48px" class="" :src="`/icons/color/${name.replace('USDT' , '').toLowerCase()}.svg`" :onerror="`javascript:this.src='/icons/color/${name.replace('USDT' , '').toLowerCase()}.png';`"  alt=""></template><br>{{name.replace('USDT' , '')}}</td>
               <td v-if="(name.replace('USDT' , '') === 'BTC' | name.replace('USDT' , '') === 'ETH' | name.replace('USDT' , '') === 'TRX' | name.replace('USDT' , '') === 'DOGE' | name.replace('USDT' , '') === 'SHIB' | name.replace('USDT' , '') === 'BNB' | name.replace('USDT' , '') === 'BCH' | name.replace('USDT' , '') === 'XRP')" class=" cent"  ><br><a > {{item.buy}}<br></a><hr style="margin:0!important" class="omobile"> <a class="omobile">خرید : <br>{{(item.buy * 1.007 * rialprice).toFixed(0)}} <br> فروش :‌ <br>{{(item.buy * 1.001  * rialprice).toFixed(0)}}</a> </td>
               <td v-if="(name.replace('USDT' , '') === 'BTC' | name.replace('USDT' , '') === 'ETH' | name.replace('USDT' , '') === 'TRX' | name.replace('USDT' , '') === 'DOGE' | name.replace('USDT' , '') === 'SHIB' | name.replace('USDT' , '') === 'BNB' | name.replace('USDT' , '') === 'BCH' | name.replace('USDT' , '') === 'XRP')" class=" cent nmobile" style="color:green"><br> {{(item.buy * 1.007 * rialprice).toFixed(0)}}</td>
               <td v-if="(name.replace('USDT' , '') === 'BTC' | name.replace('USDT' , '') === 'ETH' | name.replace('USDT' , '') === 'TRX' | name.replace('USDT' , '') === 'DOGE' | name.replace('USDT' , '') === 'SHIB' | name.replace('USDT' , '') === 'BNB' | name.replace('USDT' , '') === 'BCH' | name.replace('USDT' , '') === 'XRP')" class=" cent nmobile" style="color:red"><br> {{(item.buy * 1.001  * rialprice).toFixed(0)}}</td>
@@ -153,7 +153,7 @@
           <div class="col-12" style="height:250px">
             <div class="col-4" style="height:100% ; float:right ; padding:2%">
               <b-navbar-brand to="/">
-          <img style="width:60px; height:70px " src="/img/brand/ars.png"><h style="color:white;font-size:35px; font-weight:bold ; margin-right: 10px">آمیزاکس</h>
+          <img style="width:60px; height:70px " src="/img/brand/ars.png"><a style="color:white;font-size:35px; font-weight:bold ; margin-right: 10px">آمیزاکس</a>
               </b-navbar-brand><br><br>
               </div>
             <div class="col-3" style="height:100% ; float:right ; padding:2%">

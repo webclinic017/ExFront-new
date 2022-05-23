@@ -10,8 +10,8 @@
       :options="options"
       :data="data"
     />    <br>
-    <h2 style="text-align:center">مجموع دارایی دلاری : {{allamount}}</h2>
-    <h2 style="text-align:center">مجموع دارایی ریالی : {{allamountrial}}</h2>
+    <h2 style="text-align:center">مجموع دارایی به دلار : {{allamount.toFixed(2)}}</h2>
+    <h2 style="text-align:center">مجموع دارایی به ریال : {{allamountrial}}</h2>
     </b-card>
 
     <br><br>
@@ -57,10 +57,10 @@
           </thead>
         <tbody>
           <tr v-for="(section) in wallets" v-bind:key="section.id">
-                  <td v-if="section.balance " style="width:15%;font-wieght:bold;font-family:'arial';font-size:20px"><router-link :to="`#`" class="text-big font-weight-semibold" >
-                  {{section.brand}}
+                  <td v-if="parseFloat(section.balance) !== 0 " style="width:15%;font-wieght:bold;font-family:'arial';font-size:20px"><router-link :to="`#`" class="text-big font-weight-semibold" >
+                  <img style="width:48px" class="" :src="`/icons/color/${section.brand.toLowerCase()}.svg`" :onerror="`javascript:this.src='/icons/color/${section.brand.toLowerCase()}.png';`"  alt=""><br>{{section.brand}}
                   </router-link></td>
-                  <td v-if="section.balance" style="padding:20px;font-family:'arial';font-size:14px"> <router-link :to="`#`"><a v-if="!section.balance">0</a> 
+                  <td v-if="parseFloat(section.balance) !== 0" style="padding:20px;font-family:'arial';font-size:14px"> <router-link :to="`#`"><a v-if="(parseFloat(section.balance) === 0)">0</a> 
                   {{section.balance}}<br>
                   <div v-if="!(section.brand.includes('USD'))">
                   <a v-if="prices[section.brand + 'USDT']">{{(section.balance * prices[section.brand + 'USDT'].last).toFixed(2)}} USD</a><br>
@@ -72,21 +72,21 @@
                   <a >{{(section.balance * rialprice).toFixed(0)}} ریال</a><br>
                   </div>
                   </router-link></td>
-                  <td v-if="section.balance" style="padding:0;font-family:'arial';font-size:14px"><router-link  :to="`/cpwallets/${section.name}/withdraw`" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'">برداشت</router-link><router-link :to="`/cpwallets/${section.name}/history`"  class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'"> تاریخچه </router-link><router-link :to="`/buy/${section.brand}`"  class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'"> خرید </router-link><router-link :to="`/sell/${section.brand}`"  class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'"> فروش </router-link><router-link   :to="`/cpwallets/${section.name}/deposit`" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'">واریز</router-link></td>
+                  <td v-if="parseFloat(section.balance) !== 0" style="padding:0;font-family:'arial';font-size:14px"><router-link  :to="`/cpwallets/${section.name}/withdraw`" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'">برداشت</router-link><router-link :to="`/cpwallets/${section.name}/history`"  class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'"> تاریخچه </router-link><router-link :to="`/buy/${section.brand}`"  class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'"> خرید </router-link><router-link :to="`/sell/${section.brand}`"  class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'"> فروش </router-link><router-link   :to="`/cpwallets/${section.name}/deposit`" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'">واریز</router-link></td>
           </tr>
           <tr v-for="(section) in wallets" v-bind:key="section.name">
-                  <td v-if="section.brand == 'USDT' |section.brand == 'BTC' |section.brand == 'ETH' |section.brand == 'TRX' && !section.balance" style="width:15%;font-wieght:bold;font-family:'arial';font-size:20px"><router-link :to="`#`" class="text-big font-weight-semibold" >
-                  {{section.brand}}
+                  <td v-if="(section.brand == 'USDT' |section.brand == 'BTC' |section.brand == 'ETH' |section.brand == 'TRX' && (parseFloat(section.balance) === 0))" style="width:15%;font-wieght:bold;font-family:'arial';font-size:20px"><router-link :to="`#`" class="text-big font-weight-semibold" >
+                  <img style="width:48px" class="" :src="`/icons/color/${section.brand.toLowerCase()}.svg`" :onerror="`javascript:this.src='/icons/color/${section.brand.toLowerCase()}.png';`"  alt=""><br>{{section.brand}}
                   </router-link></td>
-                  <td v-if="section.brand == 'USDT' |section.brand == 'BTC' |section.brand == 'ETH' |section.brand == 'TRX' && !section.balance" style="padding:20px;font-family:'arial';font-size:14px"> <router-link :to="`#`"><a v-if="!section.balance">0</a> {{section.balance}}</router-link></td>
-                  <td v-if="section.brand == 'USDT' |section.brand == 'BTC' |section.brand == 'ETH' |section.brand == 'TRX' && !section.balance" style="padding:0;font-family:'arial';font-size:14px"><router-link  :to="`/cpwallets/${section.name}/withdraw`" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'">برداشت</router-link><router-link :to="`/cpwallets/${section.name}/history`"  class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'"> تاریخچه </router-link><router-link :to="`/buy/${section.brand}`"  class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'"> خرید </router-link><router-link :to="`/sell/${section.brand}`"  class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'"> فروش </router-link><router-link   :to="`/cpwallets/${section.name}/deposit`" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'">واریز</router-link></td>
+                  <td v-if="(section.brand == 'USDT' |section.brand == 'BTC' |section.brand == 'ETH' |section.brand == 'TRX' && (parseFloat(section.balance) === 0))" style="padding:20px;font-family:'arial';font-size:14px"> <router-link :to="`#`"><a v-if="(parseFloat(section.balance) === 0)">0</a> {{section.balance}}</router-link></td>
+                  <td v-if="(section.brand == 'USDT' |section.brand == 'BTC' |section.brand == 'ETH' |section.brand == 'TRX' && (parseFloat(section.balance) === 0))" style="padding:0;font-family:'arial';font-size:14px"><router-link  :to="`/cpwallets/${section.name}/withdraw`" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'">برداشت</router-link><router-link :to="`/cpwallets/${section.name}/history`"  class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'"> تاریخچه </router-link><router-link :to="`/buy/${section.brand}`"  class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'"> خرید </router-link><router-link :to="`/sell/${section.brand}`"  class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'"> فروش </router-link><router-link   :to="`/cpwallets/${section.name}/deposit`" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'">واریز</router-link></td>
           </tr>
           <tr v-for="(section) in wallets" v-bind:key="section.id">
-                  <td v-if="!(section.brand == 'USDT' |section.brand == 'BTC' |section.brand == 'ETH' |section.brand == 'TRX') && !section.balance" style="width:15%;font-wieght:bold;font-family:'arial';font-size:20px"><router-link :to="`#`" class="text-big font-weight-semibold" >
-                  {{section.brand}}
+                  <td v-if="!(section.brand == 'USDT' |section.brand == 'BTC' |section.brand == 'ETH' |section.brand == 'TRX') && (parseFloat(section.balance) === 0)" style="width:15%;font-wieght:bold;font-family:'arial';font-size:20px"><router-link :to="`#`" class="text-big font-weight-semibold" >
+                  <img style="width:48px" class="" :src="`/icons/color/${section.brand.toLowerCase()}.svg`" :onerror="`javascript:this.src='/icons/color/${section.brand.toLowerCase()}.png';`"  alt=""><br>{{section.brand}}
                   </router-link></td>
-                  <td v-if="!(section.brand == 'USDT' |section.brand == 'BTC' |section.brand == 'ETH' |section.brand == 'TRX') && !section.balance" style="padding:20px;font-family:'arial';font-size:14px"> <router-link :to="`#`"><a v-if="!section.balance">0</a> {{section.balance}}</router-link></td>
-                  <td v-if="!(section.brand == 'USDT' |section.brand == 'BTC' |section.brand == 'ETH' |section.brand == 'TRX') && !section.balance" style="padding:0;font-family:'arial';font-size:14px"><router-link  :to="`/cpwallets/${section.name}/withdraw`" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'">برداشت</router-link><router-link :to="`/wallets/${section.name}/history`"  class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'"> تاریخچه </router-link><router-link :to="`/buy/${section.brand}`"  class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'"> خرید </router-link><router-link :to="`/sell/${section.brand}`"  class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'"> فروش </router-link><router-link   :to="`/cpwallets/${section.name}/deposit`" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'">واریز</router-link></td>
+                  <td v-if="!(section.brand == 'USDT' |section.brand == 'BTC' |section.brand == 'ETH' |section.brand == 'TRX') && (parseFloat(section.balance) === 0)" style="padding:20px;font-family:'arial';font-size:14px"> <router-link :to="`#`"><a v-if="(parseFloat(section.balance) === 0)">0</a> {{section.balance}}</router-link></td>
+                  <td v-if="!(section.brand == 'USDT' |section.brand == 'BTC' |section.brand == 'ETH' |section.brand == 'TRX') && (parseFloat(section.balance) === 0)" style="padding:0;font-family:'arial';font-size:14px"><router-link  :to="`/cpwallets/${section.name}/withdraw`" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'">برداشت</router-link><router-link :to="`/wallets/${section.name}/history`"  class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'"> تاریخچه </router-link><router-link :to="`/buy/${section.brand}`"  class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'"> خرید </router-link><router-link :to="`/sell/${section.brand}`"  class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'"> فروش </router-link><router-link   :to="`/cpwallets/${section.name}/deposit`" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'">واریز</router-link></td>
 
           </tr>
         </tbody>
@@ -115,6 +115,7 @@ export default {
     this.getw()
     this.getprice2()
     this.getrialprice()
+    this.inits()
   },
   data: () => ({
     currencies: [],
@@ -134,12 +135,27 @@ export default {
       options: {
         width: window.innerWidth /1.5,
         height: 400,
+        pieHole: 0.6
       }
   }),
   forumPath: [
     { text: 'کیف ها', active: true }
   ],
   methods: {
+    inits (){
+      if(window.innerWidth > 600){
+          this.options.width = parseInt(window.innerWidth /1.5)
+      }else{
+        this.options.width = parseInt(window.innerWidth /1.1)
+      }
+      window.addEventListener('resize' , ()=>{
+        if(window.innerWidth > 600){
+          this.options.width = parseInt(window.innerWidth /1.5)
+        }else{
+          this.options.width = parseInt(window.innerWidth /1.1)
+        }
+      })
+    },
     async getrialprice () {
       window.addEventListener('resize', ()=>{
         this.options.width = window.innerWidth /2
@@ -260,13 +276,13 @@ export default {
           this.data = [['Currency', 'Balance']]
           for (const [key, value] of Object.entries(this.walletsback)){
             if(value.balance  > 0 && this.prices[value.brand + 'USDT'] !== null && value.brand !== 'USDT'){
-              this.data.push([key + '($)' , this.allamount + (Number(value.balance) * Number(this.prices[value.brand + 'USDT'].last)).toFixed(2)])
+              this.data.push([key + '($)' , parseInt(Number(value.balance) * Number(this.prices[value.brand + 'USDT'].last))])
               this.allamount = this.allamount + (Number(value.balance) * Number(this.prices[value.brand + 'USDT'].last))
-              this.allamountrial = parseInt(this.allamountrial + Number(value.balance) * Number(this.prices[value.brand + 'USDT'].last) * this.rialprice)
+              this.allamountrial = parseInt(this.allamountrial + (Number(value.balance) * Number(this.prices[value.brand + 'USDT'].last) * this.rialprice))
             }if (value.brand === 'USDT'){
-              this.data.push([key + '($)' , this.allamount + (Number(value.balance) ).toFixed(2)])
+              this.data.push([key + '($)' , parseInt(Number(value.balance) )])
               this.allamount = this.allamount + (Number(value.balance))
-              this.allamountrial = parseInt(this.allamountrial + Number(value.balance) * this.rialprice)
+              this.allamountrial = parseInt(this.allamountrial +( Number(value.balance) * this.rialprice))
             }
           }
           

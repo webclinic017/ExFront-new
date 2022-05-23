@@ -6,7 +6,7 @@
       <router-link   to="/" class="app-brand-text demo sidenav-text font-weight-normal ml-2">
       <img v-if="!ifname" src="/img/logo.png" style="width:32px ; height: 32px ; margin-right:-8px" alt="">
         <img v-if="ifname" src="/img/logo.png" style="width:32px ; height: 32px" alt="">
-      <a v-if="ifname"><h style="color:white;font-size:22px; font-weight:bold ; margin-right: 10px">آمیزاکس</h></a> </router-link>
+      <a v-if="ifname"><a style="color:white;font-size:22px; font-weight:bold ; margin-right: 10px">آمیزاکس</a></a> </router-link>
       <a href="javascript:void(0)" class="layout-sidenav-toggle sidenav-link text-large ml-auto" @click="toggleSidenav()">
         <i class="ion ion-md-menu align-middle"></i>
       </a>

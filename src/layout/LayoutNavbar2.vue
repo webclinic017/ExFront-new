@@ -4,11 +4,11 @@
     <!-- Brand demo (see demo.css) -->
     <b-navbar-brand to="/" class="app-brand demo py-0 mr-4 pc">
         <img  src="/img/logo.png" style="width:32px ; height: 32px" alt="">
-      <span class="app-brand-text demo font-weight-normal ml-2"><h style="color:rgb(206, 206, 206);font-size:22px; font-weight:bold ; margin-right: 10px">آمیزاکس</h></span>
+      <span class="app-brand-text demo font-weight-normal ml-2"><a style="color:rgb(206, 206, 206);font-size:22px; font-weight:bold ; margin-right: 10px">آمیزاکس</a></span>
     </b-navbar-brand>
     <b-navbar-brand to="/" class="app-brand demo py-0  mob">
         <img  src="/img/logo.png" style="width:32px ; height: 32px" alt="">
-      <span class="app-brand-text demo font-weight-normal ml-2"><h style="color:rgb(206, 206, 206);font-size:22px; font-weight:bold ; margin-right: 10px">آمیزاکس</h></span>
+      <span class="app-brand-text demo font-weight-normal ml-2"><a style="color:rgb(206, 206, 206);font-size:22px; font-weight:bold ; margin-right: 10px">آمیزاکس</a></span>
     </b-navbar-brand>
 
     <b-navbar-toggle style="position:absolute; top:5px ; right:5px" target="app-layout-navbar2"></b-navbar-toggle>
@@ -126,8 +126,6 @@
     </b-collapse>
 
     <b-collapse v-if="!this.$store.state.isAuthenticated" is-nav id="app-layout-navbar">
-
-      <b-collapse v-if="!this.$store.state.isAuthenticated" is-nav id="app-layout-navbar">
       <!-- Divider -->
       <hr class="d-lg-none w-100 my-2">
 
@@ -166,6 +164,8 @@ export default {
     return {
       notification: [],
       tickets: [],
+      tunseen: [],
+      nunseen: []
     }
   },
   mounted(){

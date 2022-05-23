@@ -9,7 +9,7 @@
           <b-card-body class="py-3 wallets">
             <h4>
               Available <br>
-              <div v-if="wallets.balance" class="col-12 cent"> {{wallets.balance}} <div v-if="!wallets.balance">0</div> </div>
+              <div v-if="wallets.balance" class="col-12 cent"> {{wallets.balance.toFixed(6)}} <div v-if="!wallets.balance">0</div> </div>
             </h4>
 
           </b-card-body>

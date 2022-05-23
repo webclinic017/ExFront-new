@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import LayoutNavbar from './LayoutNavbar'
+import LayoutNavbar from './LayoutNavbar2'
 import LayoutFooter from './LayoutFooter'
 
 export default {
