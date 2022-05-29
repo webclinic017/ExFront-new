@@ -52,6 +52,7 @@
             <tr>
               <th>Currency</th>
               <th>Available</th>
+              <th>Price</th>
               <th>Operations</th>
             </tr>
           </thead>
@@ -66,12 +67,14 @@
                   <a v-if="prices[section.brand + 'USDT']">{{(section.balance * prices[section.brand + 'USDT'].last).toFixed(2)}} USD</a><br>
                   <a v-if="prices[section.brand + 'USDT']">{{(section.balance * prices[section.brand + 'USDT'].last * rialprice).toFixed(0)}} ریال</a><br>
                   <a v-if="(!prices[section.brand + 'USDT'])"> در حال حاضر قیمت دلاری و <br> ریالی این ارز در دسترس نیست</a><br>
+
                   </div>
                   <div v-if="(section.brand.includes('USD'))">
                   <a >{{section.balance}} USD</a><br>
                   <a >{{(section.balance * rialprice).toFixed(0)}} ریال</a><br>
                   </div>
                   </router-link></td>
+                  <td v-if="(section.brand.includes('USD'))" style="font-family:'arial'"><br>{{prices[section.brand + 'USDT'].buy}}</td>
                   <td v-if="parseFloat(section.balance) !== 0" style="padding:0;font-family:'arial';font-size:14px"><router-link  :to="`/cpwallets/${section.name}/withdraw`" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'">برداشت</router-link><router-link :to="`/cpwallets/${section.name}/history`"  class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'"> تاریخچه </router-link><router-link :to="`/buy/${section.brand}`"  class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'"> خرید </router-link><router-link :to="`/sell/${section.brand}`"  class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'"> فروش </router-link><router-link   :to="`/cpwallets/${section.name}/deposit`" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'">واریز</router-link></td>
           </tr>
           <tr v-for="(section) in wallets" v-bind:key="section.name">
@@ -79,6 +82,7 @@
                   <img style="width:48px" class="" :src="`/icons/color/${section.brand.toLowerCase()}.svg`" :onerror="`javascript:this.src='/icons/color/${section.brand.toLowerCase()}.png';`"  alt=""><br>{{section.brand}}
                   </router-link></td>
                   <td v-if="(section.brand == 'USDT' |section.brand == 'BTC' |section.brand == 'ETH' |section.brand == 'TRX' && (parseFloat(section.balance) === 0))" style="padding:20px;font-family:'arial';font-size:14px"> <router-link :to="`#`"><a v-if="(parseFloat(section.balance) === 0)">0</a> {{section.balance}}</router-link></td>
+                  <td v-if="(section.brand == 'USDT' |section.brand == 'BTC' |section.brand == 'ETH' |section.brand == 'TRX' && (parseFloat(section.balance) === 0))" style="font-family:'arial'"><br>{{prices[section.brand + 'USDT'].buy}}</td>
                   <td v-if="(section.brand == 'USDT' |section.brand == 'BTC' |section.brand == 'ETH' |section.brand == 'TRX' && (parseFloat(section.balance) === 0))" style="padding:0;font-family:'arial';font-size:14px"><router-link  :to="`/cpwallets/${section.name}/withdraw`" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'">برداشت</router-link><router-link :to="`/cpwallets/${section.name}/history`"  class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'"> تاریخچه </router-link><router-link :to="`/buy/${section.brand}`"  class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'"> خرید </router-link><router-link :to="`/sell/${section.brand}`"  class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'"> فروش </router-link><router-link   :to="`/cpwallets/${section.name}/deposit`" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'">واریز</router-link></td>
           </tr>
           <tr v-for="(section) in wallets" v-bind:key="section.id">
@@ -86,6 +90,7 @@
                   <img style="width:48px" class="" :src="`/icons/color/${section.brand.toLowerCase()}.svg`" :onerror="`javascript:this.src='/icons/color/${section.brand.toLowerCase()}.png';`"  alt=""><br>{{section.brand}}
                   </router-link></td>
                   <td v-if="!(section.brand == 'USDT' |section.brand == 'BTC' |section.brand == 'ETH' |section.brand == 'TRX') && (parseFloat(section.balance) === 0)" style="padding:20px;font-family:'arial';font-size:14px"> <router-link :to="`#`"><a v-if="(parseFloat(section.balance) === 0)">0</a> {{section.balance}}</router-link></td>
+                  <td v-if="!(section.brand == 'USDT' |section.brand == 'BTC' |section.brand == 'ETH' |section.brand == 'TRX') && (parseFloat(section.balance) === 0)" style="font-family:'arial'"><br>{{prices[section.brand + 'USDT'].buy}}</td>
                   <td v-if="!(section.brand == 'USDT' |section.brand == 'BTC' |section.brand == 'ETH' |section.brand == 'TRX') && (parseFloat(section.balance) === 0)" style="padding:0;font-family:'arial';font-size:14px"><router-link  :to="`/cpwallets/${section.name}/withdraw`" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'">برداشت</router-link><router-link :to="`/wallets/${section.name}/history`"  class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'"> تاریخچه </router-link><router-link :to="`/buy/${section.brand}`"  class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'"> خرید </router-link><router-link :to="`/sell/${section.brand}`"  class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'"> فروش </router-link><router-link   :to="`/cpwallets/${section.name}/deposit`" class="btnfont btn btn-dark walbtn" style="font:16px 'Yekan'">واریز</router-link></td>
 
           </tr>
@@ -348,7 +353,7 @@ a{
   display: none;
 }
 .walbtn{
-height:30%;
+height:17%;
 width: 90%;
 min-height: 30px;
 float: left;

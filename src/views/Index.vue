@@ -3,24 +3,15 @@
     <div class="ban">
       <!-- Card stats -->
       
-      <b-row style="top:100px ; position:absolute ; height:300px ; width:100%">
-        <b-col style="background:none!important">
+      <b-row style="top:100px ; position:absolute ; height:300px ; width:100% ; margin:0 ; padding:0">
+        <b-col style="background:none!important ; margin:0 ; padding:0">
           <div class="mainban" style="height: 150px ;margin:auto; text-align:center">
-            <h2 class="mainhead" style="">خرید و فروش امن بیت‌کوین و ارزهای دیجیتال</h2>
-            <h2 class="mainsubhead" style="color:black">به بزرگترین بازار ارز دیجیتال ایران بپیوندید</h2><br><br>
-            <div style="direction:rtl ; width:90%; margin-right:5%!important; margin-left:5%!important" class="input-group mb-3 pc">
-              
-              <input style="text-align:center ; background: #dddddd ; color:grey"  type="text" class="form-control" placeholder="ایمیل" aria-label="" aria-describedby="basic-addon1">
-              <div class="input-group-prepend">
-                <button class="btn btn-dark" type="button" style="padding:">هم اکنون ثبت نام کنید</button>
-              </div>
-            </div>
-            <div class="mob" style="width:100%!important">
-              <input style="text-align:center ; background: #dddddd ; color:grey ; width:100%"  type="text" class="form-control" placeholder="ایمیل" aria-label="" aria-describedby="basic-addon1">
+            <div style=" border-radius: 20px;"><br><br>
+              <h2 class="mainhead" style="color:#cecece ; text-shadow: black 1.5px 1.5px">خرید و فروش امن بیت‌کوین و ارزهای دیجیتال</h2>
+              <h2 class="mainsubhead" style="color:#898989 ; text-shadow: black 0.5px 0.5px">به بزرگترین بازار ارز دیجیتال ایران بپیوندید</h2><br><br>
             </div><br>
-
-            <div class="mob" style="width:100%!important">
-                <button class="btn btn-dark" type="button" style="width:100%">هم اکنون ثبت نام کنید</button>
+            <div style="direction:rtl ; width:90%; margin-right:5%!important; margin-left:5%!important" ><br>
+                <button class="btn btn-success" type="button" style="width:100%">هم اکنون ثبت نام کنید</button>
             </div>
           </div>
         </b-col>
@@ -36,7 +27,7 @@
           <button style="margin-top:10px ; margin-bottom:15px" class="btn btn-dark" @click="sorted = true ;sorter('change')">میزان رشد</button>
 
           <br>
-          <table class="table " style="direction:rtl!important;margin:0">
+          <table class="table " style="direction:rtl!important;margin:0; max-height:350px">
           <thead>
             <tr>
               <th class=" cent">نوع ارز</th>
@@ -467,11 +458,15 @@
 </script>
 <style>
 .ban{
-  background: url('/IMG_6384.PNG') no-repeat;
+  background-color: black;
+  background: url(https://img.freepik.com/free-vector/smooth-white-wave-background_52683-55288.jpg?t=st=1653504682~exp=1653505282~hmac=6b2082001ebf577a66d33422bc039cb4370db5ee4b4a28d8b2e1c8263d19c3c3&w=740);
   background-size: 100% 100%;
   background-position-x:center;
-  height:850px; 
+  
+  height:635px; 
   width:100%;
+  opacity: .9;
+  margin:0
 }
 .card-img-top {
   height:160px
@@ -488,18 +483,15 @@
   text-align: center;
 }
 .mainhead{
-  font:48px 'yekan';
-  color:black;
+  font:42px 'yekan';
+  color:#ececec;
   font-weight:bolder
 }
 .mainban{
-  width:65%;
-  background: rgba(255, 255, 255, 0.5);
-  height: 550px!important;
-  border-radius: 20px;
-  border-style: solid;
-  border-color: rgba(255, 255, 255, 0.8);
+  width:100%;
+  height: 510px!important;
   padding: 3%;
+  color:#ececec
 }
 .omobile{
   display : none;
@@ -508,12 +500,12 @@
 @media only screen and (max-width: 1023px) {
 .mainhead{
   font:25px 'yekan';
-  color:black;
+  color:#ececec;
   font-weight:bolder
 }
 .mainsubhead{
   font:18px 'yekan';
-  color:black;
+  color:#ececec;
 }
 .ban{
   height:500px; 

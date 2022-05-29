@@ -16,7 +16,7 @@
           <hr>
                   <img v-if="details.get_otp" id="qr" :src="'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=' + details.get_otp"><br>
 
-          {{details.get_otp}} <br>
+          <br>
            <input disabled id="google" type="checkbox" v-if="details.googleverify" variant="dark" style="float:right" checked>
            <input disabled id="google" type="checkbox" v-if="!details.googleverify" variant="dark" style="float:right">   ورود چند عاملی (گوگل)
            <div class="clear"></div>

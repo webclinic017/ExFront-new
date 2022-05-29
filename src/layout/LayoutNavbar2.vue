@@ -116,11 +116,11 @@
             </span>
           </template>
 
-          <b-dd-item><i class="ion ion-ios-person text-lightest"></i> &nbsp; My profile</b-dd-item>
-          <b-dd-item><i class="ion ion-ios-mail text-lightest"></i> &nbsp; Messages</b-dd-item>
-          <b-dd-item><i class="ion ion-md-settings text-lightest"></i> &nbsp; Account settings</b-dd-item>
+          <b-dd-item href="/user"><i class="ion ion-ios-person text-lightest"></i> &nbsp; اطلاعات کاربری</b-dd-item>
+          <b-dd-item href="/user-level"><i class="ion ion-ios-mail text-lightest"></i> &nbsp; تایید هویت</b-dd-item>
+          <b-dd-item href="/user-security"><i class="ion ion-md-settings text-lightest"></i> &nbsp; امنیت</b-dd-item>
           <b-dd-divider />
-          <b-dd-item><i class="ion ion-ios-log-out text-danger"></i> &nbsp; Log Out</b-dd-item>
+          <b-dd-item href="/logout"><i class="ion ion-ios-log-out text-danger"></i> &nbsp; خروج</b-dd-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
     </b-collapse>
@@ -133,12 +133,12 @@
       <b-navbar-nav @click="seen()" class="align-items-lg-center ml-auto">
         <b-nav-item>
           <template >
-            <button class="btn btn-success">ورود</button>
+            <button href="/login" class="btn btn-success">ورود</button>
           </template>
         </b-nav-item>
         <b-nav-item>
           <template >
-            <button class="btn btn-primary">ثبت نام</button>
+            <button href="/register" class="btn btn-primary">ثبت نام</button>
           </template>
         </b-nav-item>
       </b-navbar-nav>
