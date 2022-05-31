@@ -1,18 +1,39 @@
 <template>
   <div class="container" style="background:none;width:100%; padding:0 ; border-radius:15%; margin:0!important">
     <div style="margin:0; width:100%">
-        <div v-if="!email" class="card-footer text-muted" style=";z-index:1; border-radius:30px" id="emailadd">
+        
+        <div v-if="!hide2 && hide" id="chat-container" style="height:100% ;  border-radius:30px ; background:none" class="card">
+            
+          <div class="card-header text-white text-center" style="height:60px ; background:#2f3237 ; border-radius: 15px 15px 0 0 ">
+            پشتیبانی آنلاین<br>
+            <button class="btn btn-secondary" style="position:absolute;top:5px;right:5px;padding:0 7px;border-radius:50%!important ; width:25px!important; height:25px" @click="hide2 = true">-</button>
+          </div>
+          
+
+          <div class="card-body" style="height:320px; overflow:auto">
+            <div class="container chat-body" style=";width:100%;height:300px;">
+              <div class="chat-section">
+                <template >
+
+                  <div  class="card-footer text-muted" style=";z-index:1;width:100%;padding:0; border-style:none" id="emailadd">
+                    <br>
               <form @submit.prevent="startChatSession">
                   <div >
-                      <div class="col-sm-12">
+                      <div class="col-12">
                       <input v-model="emailadd" required type="text" placeholder="آدرس ایمیل" />
                       </div><br>
-                      <div class="col-sm-12">
+                      <div class="col-12">
                       <button class="btn btn-dark" style="width:100%">شروع چت</button>
                       </div>
                   </div>
               </form>
+        </div><br><br>
+                  <div style="clear:both"></div>
+                </template>
+              </div>
             </div>
+          </div>
+        </div>
 
         <div v-if="!hide" id="chat-container" style="height:100% ;  border-radius:30px ; background:none" class="card">
             
@@ -67,7 +88,7 @@
         
 
         <div v-else>
-          <div  class="chat-btn" style="background:#efefef;border-radius:50%; box-shadow: 2px 1px 2px 1px grey">
+          <div v-if="email | hide2"  class="chat-btn" style="background:#efefef;border-radius:50%; box-shadow: 2px 1px 2px 1px grey">
             <span  v-if="notread" style="width:22px;height:22px;border-radius:50%; background:red; position:absolute ;text-align:center; color:white ; font-family:'arial'">{{notread}}</span>
             <img @click="startChatSession" style="border-radius:10%;width:70%;height:70%; margin:15%" src="/img/chat.png">
             </div>
@@ -85,6 +106,7 @@ export default {
       notread:0,
       email: false,
       emailadd:'',
+      hide2: true,
       sessionStarted: false, messages: {}, message: '',uri: '',hide: this.$store.state.hide
     }
   },
@@ -118,6 +140,12 @@ export default {
           this.hide = this.$store.state.hide
       },
     async startChatSession () {
+      if(!localStorage.getItem('email')){
+        this.hide2 = false
+      }
+      if(localStorage.getItem('email')){
+        this.hide2 = true
+      }
         if (this.sessionStarted){
             this.$store.state.hide = false
             this.chatseen()
@@ -132,6 +160,7 @@ export default {
               .then(data => {
               this.sessionStarted = true
               this.uri = data.uri
+              this.startChatSession()
             })
             .catch((response) => {
             })
@@ -143,6 +172,7 @@ export default {
               .then(data => {
               this.sessionStarted = true
               this.uri = data.uri
+              this.startChatSession()
             })
             .catch((response) => {
             })
