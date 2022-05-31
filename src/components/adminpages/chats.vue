@@ -1,5 +1,5 @@
-<template>
-  <div>
+<template >
+  <div >
 
 
       <b-card no-body class="col-12">

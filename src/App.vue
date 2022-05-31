@@ -1,17 +1,25 @@
 <template>
   <div id="app" >
     <router-view :key="$route.fullPath"/>
+
+    <div style="border-radius:20px" class="chat-box">
+    <chat/>
+  </div>
   </div>
 </template>
 
 <style src="./style.scss" lang="scss"></style>
 
 <script>
+import chat from './components/pages/chats.vue'
 import _themeSettings from './vendor/libs/theme-settings/theme-settings'
 import themeSettings from '@/vendor/libs/theme-settings/theme-settings.js'
 
 import axios from 'axios'
 export default {
+  components: {
+    chat
+  },
   name: 'app',
   metaInfo: {
     title: 'Index',
@@ -76,7 +84,11 @@ a , h1 ,h2 ,h3 ,h4 ,h5 ,h6 ,span, p{
   position:fixed;left:20px;bottom:20px;width:80px;height:80px;background:#ffffff;border-radius:50%;
 }
 .chat-box{
-  position:fixed;left:-7%;bottom:3%;width:35%;
+  position:fixed;
+  left:1%;
+  bottom:3%;
+  width:25%;
+  border-radius: 5%;
   z-index: 1;
 }
 .chat-btn:hover{
@@ -131,6 +143,26 @@ input{
 .slider-handle{
   background-color: #888!important;
   background-image: -webkit-gradient(linear,left top,left bottom,from(#888),to(#333))!important;
+}
+@media only screen and (max-width: 1024px) {
+.chat-box{
+  position:fixed;
+  left:0!important;
+  bottom:0%;
+  width:35%;
+  border-radius: 5%;
+  z-index: 1;
+}
+}
+@media only screen and (max-width: 600px) {
+.chat-box{
+  position:fixed;
+  left:0!important;
+  bottom:0%;
+  width:100%;
+  border-radius: 5%;
+  z-index: 1;
+}
 }
 
 </style>

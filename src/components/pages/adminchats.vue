@@ -107,7 +107,7 @@ export default {
     async postMessage (event) {
       const data = {message: this.message}
         await axios
-        .post(`chats/${this.$route.params.uri}/messages/`, data) 
+        .post(`chats/${this.$route.params.uri}/adminmessages/`, data) 
         .then(data => {
         this.messages.push(data.data)
         this.message = '' // clear the message after sending

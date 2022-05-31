@@ -1,10 +1,9 @@
 <template>
-  <div class="container" style="background:none">
-    <div class="row">
-      <div>
-        <div hidden class="card-footer text-muted" style=";z-index:1" id="emailadd">
+  <div class="container" style="background:none;width:100%; padding:0 ; border-radius:15%; margin:0!important">
+    <div style="margin:0; width:100%">
+        <div v-if="!email" class="card-footer text-muted" style=";z-index:1; border-radius:30px" id="emailadd">
               <form @submit.prevent="startChatSession">
-                  <div class="row">
+                  <div >
                       <div class="col-sm-12">
                       <input v-model="emailadd" required type="text" placeholder="آدرس ایمیل" />
                       </div><br>
@@ -15,60 +14,50 @@
               </form>
             </div>
 
-        <div v-if="sessionStarted && !hide" id="chat-container" style="height:520px" class="card">
+        <div v-if="!hide" id="chat-container" style="height:100% ;  border-radius:30px ; background:none" class="card">
             
-          <div class="card-header text-white text-center  subtle-blue-gradient" style="height:70px">
-            پشتیبانی آنلاین<br><br>
-            {{uri}}
-            <button class="btn btn-danger" style="position:absolute;top:5px;right:5px;padding:0 7px;border-radius:50%!important" @click="hide = true">X</button>
+          <div class="card-header text-white text-center" style="height:60px ; background:#2f3237 ; border-radius: 15px 15px 0 0 ">
+            پشتیبانی آنلاین<br>
+            <button class="btn btn-secondary" style="position:absolute;top:5px;right:5px;padding:0 7px;border-radius:50%!important ; width:25px!important; height:25px" @click="hide = true">-</button>
           </div>
           
 
-          <div class="card-body" style="height:200px">
-            <div class="container chat-body" style=";width:100%;height:300px">
-              <div class="row chat-section">
-                <template>
-                  <div class="col-sm-2">
-                    <span  style="background:#007bff;font:25px 'arial';padding:10px;border-radius:50%;color:white"> {{'a'.toUpperCase()}} </span>
-                  </div>
-                  <div class="col-sm-7">
-                    <span class="card-text speech-bubble speech-bubble-peer">
-                      سلام چطور میتونیم کمکتون کنیم؟
+          <div class="card-body" style="height:320px; overflow:auto">
+            <div class="container chat-body" style=";width:100%;height:300px;">
+              <div v-for="message in messages" :key="message.id" class="chat-section">
+                <template v-if="!message.admin">
+                  <div style="max-width:85%;min-width:60% ; float:right ;">
+                    <span style="width:100% ; background:grey ; padding:5%" class="card-text speech-bubble  float-right text-white subtle-blue-gradient">
+                      <span v-if="typeof(message.user) === 'string'" style="font:12px 'arial'; color:black ; font-weight:bold">{{message.user}} <br></span>
+                      <span v-else style="font:12px 'arial'; color:black ; font-weight:bold">{{message.user.email}} <br></span><br>
+                      {{message.message}}
                     </span>
-                  </div>
-                </template>
-              </div>
-              <div v-for="message in messages" :key="message.id" class="row chat-section">
-                <template v-if="username === message.user.username | username === message.email">
-                  <div style="width:80%">
-                    <span style="width:70%" class="card-text speech-bubble speech-bubble-user float-right text-white subtle-blue-gradient">
-                      {{ message.message }}
-                    </span>
-                  </div>
-                  <div style="width:5%">
-                  </div>
+                  </div><br><br>
+                  <div style="clear:both"></div>
                 </template>
                 <template v-else>
-                  <div class="col-sm-2">
-                  </div>
-                  <div class="col-sm-7">
-                    <span class="card-text speech-bubble speech-bubble-peer">
-                      {{ message.message }}
+
+                  <div style="; float:right" >
+                    <span style="max-width:85% ;min-width:60% ;  float:left  ; padding:5%" class="card-text speech-bubble ">
+                      <span v-if="typeof(message.user) === 'string'" style="font:12px 'arial'; color:black ; font-weight:bold">{{message.user}} <br></span>
+                      <span v-else style="font:12px 'arial'; color:black ; font-weight:bold">{{message.user.email}} <br></span><br>
+                     {{message.message}}
                     </span>
-                  </div>
+                  </div><br><br>
+                  <div style="clear:both"></div>
                 </template>
               </div>
             </div>
           </div>
 
-          <div class="card-footer text-muted" style=";z-index:1">
+          <div class="card-footer text-muted" style=";z-index:1 ; background: #2f3237">
             <form @submit.prevent="postMessage">
-                <div class="row">
+                <div >
                     <div class="col-sm-12">
-                    <input v-model="message" type="text" placeholder="متن پیام ..." />
-                    </div><br>
+                    <input class="inn" style="font-family:'yekan'; border-style:none" required  v-model="message" type="text" placeholder="متن پیام ..." />
+                    </div><br><br>
                     <div class="col-sm-12">
-                    <button class="btn btn-dark" style="width:100%">Send</button>
+                    <button class="btn btn-secondary" style="width:100% ; font-family: 'yekan'">ارسال پیام</button>
                     </div>
                 </div>
             </form>
@@ -78,16 +67,12 @@
         
 
         <div v-else>
-          <div v-if="!this.$store.state.isAdmin" class="chat-btn">
+          <div  class="chat-btn" style="background:#efefef;border-radius:50%; box-shadow: 2px 1px 2px 1px grey">
             <span  v-if="notread" style="width:22px;height:22px;border-radius:50%; background:red; position:absolute ;text-align:center; color:white ; font-family:'arial'">{{notread}}</span>
-            <img @click="startChatSession" style="margin:10px;width:60px;height:60px" src="https://icon-library.com/images/chat-icon-png/chat-icon-png-22.jpg">
+            <img @click="startChatSession" style="border-radius:10%;width:70%;height:70%; margin:15%" src="/img/chat.png">
             </div>
         </div>
-
-
-
       </div>
-    </div>
   </div>
 </template>
 <script>
@@ -98,6 +83,8 @@ export default {
   data () {
     return {
       notread:0,
+      email: false,
+      emailadd:'',
       sessionStarted: false, messages: {}, message: '',uri: '',hide: this.$store.state.hide
     }
   },
@@ -112,9 +99,10 @@ export default {
 
   methods: {
       async get_user () {
-      if(this.$store.state.isAuthenticated){
+        this.email = localStorage.getItem('email')
+      if(localStorage.getItem('email')){
       await axios
-        .get('chats/user' , {email : localStorage.getItem('email')})
+        .post('chats/user' , {email : localStorage.getItem('email')})
         .then(response => {
           this.username = response.data.username
           this.uri = response.data.uri
@@ -130,7 +118,6 @@ export default {
           this.hide = this.$store.state.hide
       },
     async startChatSession () {
-      document.querySelector('#emailadd').hidden = true
         if (this.sessionStarted){
             this.$store.state.hide = false
             this.chatseen()
@@ -162,8 +149,6 @@ export default {
             }else if(this.emailadd){
               localStorage.setItem('email' , this.emailadd)
               this.startChatSession()
-            }else{
-              document.querySelector('#emailadd').hidden = false
             }
           }
           
@@ -181,7 +166,6 @@ export default {
       .catch((response) => {
       })
       }else{
-        alert(localStorage.getItem('email'))
         const data = {message: this.message , email : localStorage.getItem('email')}
         await axios
         .post(`chats/${this.uri}/messages/`, data) 
@@ -230,8 +214,10 @@ export default {
       .get(`chats/${this.uri}/messages/`) 
       .then(data => {
         this.messages = data.data.messages
+        console.log(data.data.messages)
         var tempnotread = 0
         this.notread = data.data.notseen
+        this.chatseen()
         setTimeout(() => {
           this.fetchChatSessionHistory()
         }, 20000)
@@ -243,6 +229,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+textarea:focus, input:focus, button:focus{
+    outline: none;
+}
 h1,
 h2 {
   font-weight: normal;
@@ -276,13 +265,14 @@ li {
 
 .card-body {
   background-color: #ddd;
+  padding: 0;
+  padding-top: 5%;
 }
 
 .chat-body {
   margin-top: -15px;
   margin-bottom: -5px;
   height: 380px;
-  overflow-y: auto;
 }
 
 .speech-bubble {
