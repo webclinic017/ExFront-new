@@ -1,10 +1,14 @@
 <template>
-  <div id="app" >
-    <router-view :key="$route.fullPath"/>
-
-    <div style="border-radius:20px" class="chat-box">
-    <chat/>
-  </div>
+  <div>
+    
+    <div id="app" >
+      
+      <router-view :key="$route.fullPath"/>
+      
+      <div style="border-radius:20px" class="chat-box">
+      <chat/>
+    </div>
+    </div>
   </div>
 </template>
 
@@ -12,13 +16,15 @@
 
 <script>
 import chat from './components/pages/chats.vue'
+import login from './views/Pages/Login.vue'
 import _themeSettings from './vendor/libs/theme-settings/theme-settings'
 import themeSettings from '@/vendor/libs/theme-settings/theme-settings.js'
 
 import axios from 'axios'
 export default {
   components: {
-    chat
+    chat,
+    login
   },
   name: 'app',
   metaInfo: {
@@ -65,6 +71,12 @@ export default {
 		 url('https://cdn.fontcdn.ir/Font/Persian/Yekan/Yekan-Bold.woff') format('woff'),
 		 url('https://cdn.fontcdn.ir/Font/Persian/Yekan/Yekan-Bold.ttf') format('truetype');
     font-weight: bold;
+}
+.vm--modal{
+  left:0!important
+}
+.swal2-header{
+  margin-bottom: 70px;
 }
 .theme-settings-open-btn{
   display: none!important

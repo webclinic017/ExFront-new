@@ -2,7 +2,7 @@
   <b-navbar toggleable="lg" :variant="getLayoutNavbarBg()" class="layout-navbar align-items-lg-center container-p-x">
 
     <!-- Brand demo (see demo.css) -->
-    <b-navbar-brand to="/" class="app-brand demo d-lg-none py-0 mr-4">
+    <b-navbar-brand style="width:100%;padding:0 27%; text-align:center" to="/" class="app-brand demo d-lg-none py-0 mr-4">
         <img  src="/img/logo.png" style="width:32px ; height: 32px" alt="">
       <span class="app-brand-text demo font-weight-normal ml-2"><a style="color:rgb(206, 206, 206);font-size:22px; font-weight:bold ; margin-right: 10px">آمیزاکس</a></span>
     </b-navbar-brand>
@@ -10,7 +10,7 @@
     <!-- Sidenav toggle (see demo.css) -->
     <b-navbar-nav class="layout-sidenav-toggle d-lg-none align-items-lg-center mr-auto" v-if="sidenavToggle">
       <a class="nav-item nav-link px-0 mr-lg-4" href="javascript:void(0)" @click="toggleSidenav">
-        <i class="ion ion-md-menu text-large align-middle" />
+        <i class="fas fa-angle-double-left text-large align-middle" />
       </a>
     </b-navbar-nav>
 

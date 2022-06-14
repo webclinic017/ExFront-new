@@ -50,7 +50,7 @@
                   <div style="max-width:85%;min-width:60% ; float:right ;">
                     <span style="width:100% ; background:grey ; padding:5%" class="card-text speech-bubble  float-right text-white subtle-blue-gradient">
                       <span v-if="typeof(message.user) === 'string'" style="font:12px 'arial'; color:black ; font-weight:bold">{{message.user}} <br></span>
-                      <span v-else style="font:12px 'arial'; color:black ; font-weight:bold">{{message.user.email}} <br></span><br>
+                      <span v-else style="font:12px 'arial'; color:black ; font-weight:bold">{{message.user.username}} <br></span><br>
                       {{message.message}}
                     </span>
                   </div><br><br>
@@ -61,7 +61,7 @@
                   <div style="; float:right" >
                     <span style="max-width:85% ;min-width:60% ;  float:left  ; padding:5%" class="card-text speech-bubble ">
                       <span v-if="typeof(message.user) === 'string'" style="font:12px 'arial'; color:black ; font-weight:bold">{{message.user}} <br></span>
-                      <span v-else style="font:12px 'arial'; color:black ; font-weight:bold">{{message.user.email}} <br></span><br>
+                      <span v-else style="font:12px 'arial'; color:black ; font-weight:bold">{{message.user.username}} <br></span><br>
                      {{message.message}}
                     </span>
                   </div><br><br>
@@ -114,17 +114,28 @@ export default {
     this.hider()
   },
 
-  created () {
+  beforeMount () {
       this.get_user ()
   },
   
 
   methods: {
       async get_user () {
+      if(localStorage.getItem('email') !== null){
         this.email = localStorage.getItem('email')
-      if(localStorage.getItem('email')){
       await axios
         .post('chats/user' , {email : localStorage.getItem('email')})
+        .then(response => {
+          this.username = response.data.username
+          this.uri = response.data.uri
+          if (response.data.uri) {
+            this.joinChatSession()
+            this.sessionStarted = true
+          }
+        })
+      }else{
+        await axios
+        .get('chats/user')
         .then(response => {
           this.username = response.data.username
           this.uri = response.data.uri
@@ -140,7 +151,7 @@ export default {
           this.hide = this.$store.state.hide
       },
     async startChatSession () {
-      if(!localStorage.getItem('email')){
+      if(!localStorage.getItem('email') && (!this.$store.state.isAuthenticated)){
         this.hide2 = false
       }
       if(localStorage.getItem('email')){
@@ -158,6 +169,7 @@ export default {
               .post('chats/')
               .then(data => data.data)
               .then(data => {
+                console.log(data)
               this.sessionStarted = true
               this.uri = data.uri
               this.startChatSession()

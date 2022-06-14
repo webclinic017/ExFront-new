@@ -130,10 +130,10 @@
       <hr class="d-lg-none w-100 my-2">
 
 
-      <b-navbar-nav @click="seen()" class="align-items-lg-center ml-auto">
+      <b-navbar-nav class="align-items-lg-center ml-auto">
         <b-nav-item>
           <template >
-            <button href="/login" class="btn btn-success">ورود</button>
+            <button @click="login()" class="btn btn-success">ورود</button>
           </template>
         </b-nav-item>
         <b-nav-item>
@@ -143,17 +143,18 @@
         </b-nav-item>
       </b-navbar-nav>
     </b-collapse>
-
   </b-navbar>
+  
 </template>
 
 <script>
 import axios from 'axios'
 import themeSettings from '@/vendor/libs/theme-settings/theme-settings.js'
+import vmodal from 'vue-js-modal'
+import login from './../views/Pages/Login2.vue'
 
 export default {
   name: 'app-layout-navbar',
-
   props: {
     sidenavToggle: {
       type: Boolean,
@@ -181,6 +182,17 @@ export default {
     }
   },
   methods: {
+    login(){
+      this.$modal.show(login , {} , {
+          name: "modal",
+          height: "auto",
+          width: "50%",
+          style:"left:0 , right:0 , position:'absolute'",
+          scrollable: true,
+          adaptive: true,
+          "max-width": 1200
+        })
+    },
     darkswitch(){
       if(localStorage.getItem('themeSettingsStyle') === 'material'){
         themeSettings.setStyle('light')
@@ -189,7 +201,7 @@ export default {
       }
     },
     pre(){
-      if(this.$store.state.isAuthenticated){
+      if(axios.defaults.headers.common.Authorization !== ''){
         this.get_notifications()
         this.get_tickets()
       }
@@ -262,6 +274,10 @@ export default {
 }
 .pc{
   display: flex;
+}
+.vm--modal{
+  width:40%!important;
+  left:-30%!important
 }
 @media screen and (max-width: 768px) {
 .mob{

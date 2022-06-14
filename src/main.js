@@ -2,7 +2,7 @@ import globals from './globals'
 import Vue from 'vue';
 import App from './App.vue';
 import DashboardPlugin from './plugins/dashboard-plugin';
-
+import VModal from 'vue-js-modal'
 import axios from 'axios';
 import BootstrapVue from 'bootstrap-vue';
 import VueSweetalert2 from 'vue-sweetalert2'
@@ -107,7 +107,7 @@ new Vue({
 });
 Vue.use(store)
 Vue.use(VueSweetalert2);
-
+Vue.use(VModal)
 Vue.use(VueLoading , {
   text: 'لطفا کمی صبر کنید', 
   background: 'rgba(0,0,0,0.5)',

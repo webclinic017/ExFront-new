@@ -58,6 +58,7 @@
     "vue-gallery": "~2.0.0",
     "vue-google-charts": "^0.3.3",
     "vue-input-tag": "~2.0.5",
+    "vue-js-modal": "^2.0.1",
     "vue-jstree": "~2.1.6",
     "vue-masonry": "~0.12.0",
     "vue-meta": "~2.4.0",

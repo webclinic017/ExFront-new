@@ -8,7 +8,7 @@
         <img v-if="ifname" src="/img/logo.png" style="width:32px ; height: 32px" alt="">
       <a v-if="ifname"><h style="color:white;font-size:22px; font-weight:bold ; margin-right: 10px">آمیزاکس</h></a> </router-link>
       <a href="javascript:void(0)" class="layout-sidenav-toggle sidenav-link text-large ml-auto" @click="toggleSidenav()">
-        <i class="ion ion-md-menu align-middle"></i>
+       <i class="fas fa-angle-double-right"></i>
       </a>
     </div>
     <div class="sidenav-divider mt-0" v-if="orientation !== 'horizontal'"></div>
